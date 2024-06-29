@@ -5,10 +5,9 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 
-Window.size = (300, 630)
+Window.size = (450, 940)
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
 LabelBase.register(name="minus", fn_regular="Sources/minus_icon.svg")
-
 KV = """
 ScreenManager:
     HomeScreen:
@@ -32,6 +31,7 @@ ScreenManager:
         source: "Sources/grop_logo.png"
         pos_hint: {'center_x': 0.5, 'center_y': 0.77}
         size_hint: 0.95, 1
+
 #-------------------------------------------------------------------------------------------------------
 <AutonomousPeriod>:
     name: 'autonomous_period'
@@ -40,7 +40,7 @@ ScreenManager:
             source: "Sources/Blue_side.png"
             pos_hint: {'center_x': 0.5, 'center_y': 0.78}
             size_hint: None, None
-            size: [400, 400]
+            size: [400,400]
 
         MDRectangleFlatButton: # stage note
             id: stage_button
@@ -113,6 +113,40 @@ ScreenManager:
             size: 20, 20
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
             on_press: app.buttonFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
+        MDRectangleFlatButton: # ********A********
+            id: A_area
+            text: 'A'
+            text_color: 0,0,0,1
+            font_size: '15sp'
+            md_bg_color: 0, 1, 0, app.A_area_transparency
+            size_hint: 0.19, 0.16
+            pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
+            on_press: app.buttonFunctionality(A_area, 'A_area_transparency')
+        MDRectangleFlatButton: # ********B********
+            id: B_area
+            text: 'B'
+            text_color: 0,0,0,1
+            md_bg_color: 0, 1, 0, app.B_area_transparency
+            size_hint: 0.19, 0.01
+            pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
+            on_press: app.buttonFunctionality(B_area, 'B_area_transparency')
+        MDRectangleFlatButton: # ********C********
+            id: C_area
+            text: 'C'
+            text_color: 0,0,0,1
+            md_bg_color: 0, 1, 0, app.C_area_transparency
+            size_hint: 0.19, 0.05
+            pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
+            on_press: app.buttonFunctionality(C_area, 'C_area_transparency')
+            
+        MDRectangleFlatButton: # ********D********
+            id: D_area
+            text: 'D'
+            text_color: 0,0,0,1
+            md_bg_color: 0, 1, 0, app.D_area_transparency
+            size_hint: 0.19, 0.07
+            pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
+            on_press: app.buttonFunctionality(D_area, 'D_area_transparency')
 
         MDLabel:
             text: "Click on the notes that the robot managed to pick up"
@@ -122,83 +156,103 @@ ScreenManager:
             font_size: "14sp"
             halign: "center"
 
-        # Scrollable section
-        ScrollView:
-            size_hint: (1, 0.45)  # Adjust the height to fit your needs
-            pos_hint: {'center_x': 0.5, 'center_y': 0.225}
-            do_scroll_x: False  # Disable horizontal scrolling
+        # Robot managed in to the amp section
+        MDLabel:
+            text: "How much did the robot manage into the amp:"
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.46}
+            padding: 20
+            font_size: "14sp"
+            halign: "center"
 
-            BoxLayout:
-                size_hint_y: None
-                height: self.minimum_height
+        MDFloatingActionButton: # add button
+            icon: "plus"
+            pos_hint: {'center_x': 0.85, 'center_y': 0.37}
+            md_bg_color: 0, 1, 0, 1
+            on_press: app.additionNote(note_in_amp, 'amp_count')
 
-                MDLabel:
-                    text: "How much did the robot manage into the amp:"
-                    color: 1, 1, 1, 1
-                    padding: 20
-                    font_size: "14sp"
-                    halign: "center"
+        MDFloatingActionButton: # subtract button
+            icon: "minus"
+            md_bg_color: 1, 0, 0, 1
+            pos_hint: {'center_x': 0.15, 'center_y': 0.37}
+            on_press: app.SubtractNote(note_in_amp, "amp_count")
 
-                MDFloatingActionButton: # add button
-                    icon: "plus"
-                    md_bg_color: 0, 1, 0, 1
-                    on_press: app.additionNote(note_in_amp, 'amp_count')
+        MDBoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            size_hint: 0.48, 0.08
+            md_bg_color: 1, 1, 1, 1
+            radius: 20
+            MDLabel:
+                id: note_in_amp
+                text: str(app.amp_count)
+                halign: 'center'
+                font_size: "40sp"
+                pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+                color: 0, 0, 0, 1
 
-                MDFloatingActionButton: # subtract button
-                    icon: "minus"
-                    md_bg_color: 1, 0, 0, 1
-                    on_press: app.SubtractNote(note_in_amp, "amp_count")
+        # Robot missed section
+        MDLabel:
+            text: "How much did the robot miss:"
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.29}
+            padding: 20
+            font_size: "14sp"
+            halign: "center"
 
-                MDBoxLayout:
-                    size_hint: 0.48, 0.08
-                    md_bg_color: 1, 1, 1, 1
-                    radius: 20
-                    MDLabel:
-                        id: note_in_amp
-                        text: app.amp_count
-                        halign: 'center'
-                        font_size: "40sp"
-                        pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-                        color: 0, 0, 0, 1
+        MDFloatingActionButton: # add button
+            icon: "plus"
+            pos_hint: {'center_x': 0.85, 'center_y': 0.22}
+            md_bg_color: 0, 1, 0, 1
+            on_press: app.additionNote(missed_note, "miss_count")
 
-                MDLabel:
-                    text: "How much did the robot miss:"
-                    color: 1, 1, 1, 1
-                    padding: 20
-                    font_size: "14sp"
-                    halign: "center"
+        MDFloatingActionButton: # subtract button
+            icon: "minus"
+            md_bg_color: 1, 0, 0, 1
+            pos_hint: {'center_x': 0.15, 'center_y': 0.22}
+            on_press: app.SubtractNote(missed_note, 'miss_count')
 
-                MDFloatingActionButton: # add button
-                    icon: "plus"
-                    md_bg_color: 0, 1, 0, 1
-                    on_press: app.additionNote(missed_note, "miss_count")
+        MDBoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.22}
+            size_hint: 0.48, 0.08
+            md_bg_color: 1, 1, 1, 1
+            radius: 20
+            MDLabel:
+                id: missed_note
+                text: str(app.miss_count)
+                halign: 'center'
+                font_size: "40sp"
+                pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+                color: 0, 0, 0, 1
 
-                MDFloatingActionButton: # subtract button
-                    icon: "minus"
-                    md_bg_color: 1, 0, 0, 1
-                    on_press: app.SubtractNote(missed_note, 'miss_count')
+        # Robot passed the line section
+        MDLabel:
+            text: "Did the robot pass the line?"
+            color: 1, 1, 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+            padding: 20
+            font_size: "14sp"
+            halign: "center"
 
-                MDBoxLayout:
-                    size_hint: 0.48, 0.08
-                    md_bg_color: 1, 1, 1, 1
-                    radius: 20
-                    MDLabel:
-                        id: missed_note
-                        text: app.miss_count
-                        halign: 'center'
-                        font_size: "40sp"
-                        pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-                        color: 0, 0, 0, 1
+        MDRaisedButton:
+            text: "Yes"
+            pos_hint: {'center_x': 0.32, 'center_y': 0.1}
+            md_bg_color: 0, 1, 0, 1
+            on_press: app.robotPassedLine(True)
 
-                # Add more questions here
-                # ...
+        MDRaisedButton:
+            text: "No"
+            pos_hint: {'center_x': 0.62, 'center_y': 0.1}
+            md_bg_color: 1, 0, 0, 1
+            on_press: app.robotPassedLine(False)
 
         # Next button
         MDRectangleFlatButton:
-            pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+            pos_hint: {'center_x': 0.85, 'center_y': 0.05}
             text: "Next"
             md_bg_color: 0, 0, 1, 1
             text_color: 1, 1, 1, 1
+            on_press: root.manager.current = 'teleop_mid'
+
 
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
@@ -207,22 +261,29 @@ ScreenManager:
     name: 'end'
 """
 
+
 class HomeScreen(Screen):
     pass
+
 
 class AutonomousPeriod(Screen):
     pass
 
+
 class TeleopMidGamePeriod(Screen):
     pass
 
+
 class TeleopEndGamePeriod(Screen):
     pass
+
 
 class ScoutingApp(MDApp):
     def build(self):
         self.close_note_line_x = 0.336
         self.far_note_line_x = 0.858
+        self.area_x = 0.15
+
         self.stage_note_y = 0.78
         self.speaker_note_y = 0.848
         self.amp_note_y = 0.915
@@ -231,6 +292,10 @@ class ScoutingApp(MDApp):
         self.mid_field_mid_note_y = 0.78
         self.mid_field_high_note_y = 0.858
         self.mid_field_highest_note_y = 0.935
+        self.A_area_y = 0.7
+        self.B_area_y = 0.8
+        self.C_area_y = 0.848
+        self.D_area_y = 0.91
 
         # Set transparency levels
         self.stage_note_transparency = 0.1
@@ -241,14 +306,22 @@ class ScoutingApp(MDApp):
         self.mid_field_mid_note_transparency = 0.1
         self.mid_field_high_note_transparency = 0.1
         self.mid_field_highest_note_transparency = 0.1
+        self.A_area_transparency = 0.1
+        self.B_area_transparency = 0.1
+        self.C_area_transparency = 0.1
+        self.D_area_transparency = 0.1
 
         self.amp_count = "0"
         self.miss_count = "0"
+        self.robot_Passed_the_Line = False
 
         self.theme_cls.theme_style = "Dark"
 
         screen = Builder.load_string(KV)
         return screen
+
+    def robotPassedLine(self, isPassedLine):
+        self.robot_Passed_the_Line = isPassedLine
 
     def buttonFunctionality(self, button, transparency_attr):
         current_transparency = getattr(self, transparency_attr, 0.1)
@@ -259,7 +332,7 @@ class ScoutingApp(MDApp):
         button.md_bg_color = (1, 0, 1, getattr(self, transparency_attr))
 
     def SubtractNote(self, label, SubtractFrom):
-        if SubtractFrom == 'amp_count':
+        if SubtractFrom == "amp_count":
             if int(self.amp_count) > 0:
                 self.amp_count = str(int(self.amp_count) - 1)
             label.text = self.amp_count
@@ -269,7 +342,7 @@ class ScoutingApp(MDApp):
             label.text = self.miss_count
 
     def additionNote(self, label, addTo):
-        if addTo == 'amp_count':
+        if addTo == "amp_count":
             if int(self.amp_count) <= 7:
                 self.amp_count = str(int(self.amp_count) + 1)
             label.text = self.amp_count
@@ -277,6 +350,7 @@ class ScoutingApp(MDApp):
             if int(self.miss_count) <= 4:
                 self.miss_count = str(int(self.miss_count) + 1)
             label.text = self.miss_count
+
 
 if __name__ == "__main__":
     ScoutingApp().run()
