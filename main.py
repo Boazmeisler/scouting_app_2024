@@ -5,7 +5,7 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 
-Window.size = (450, 940)
+Window.size = (300, 630)
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
 LabelBase.register(name="minus", fn_regular="Sources/minus_icon.svg")
 KV = """
@@ -32,22 +32,23 @@ ScreenManager:
         pos_hint: {'center_x': 0.5, 'center_y': 0.77}
         size_hint: 0.95, 1
 
-#-------------------------------------------------------------------------------------------------------
+#-----------------------------------*******Auto Game********----------------------------------------
 <AutonomousPeriod>:
     name: 'autonomous_period'
-    FloatLayout:  
+    FloatLayout: 
         Image:
             source: "Sources/Blue_side.png"
             pos_hint: {'center_x': 0.5, 'center_y': 0.78}
-            size_hint: None, None
-            size: [400,400]
+            size_hint: 0.89, 0.38
+            allow_stretch: True
+            keep_ratio: False
 
         MDRectangleFlatButton: # stage note
             id: stage_button
             text: ''
             md_bg_color: 1, 0, 1, app.stage_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045, 0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.stage_note_y}
             on_press: app.buttonFunctionality(stage_button, 'stage_note_transparency')
 
@@ -55,8 +56,8 @@ ScreenManager:
             id: speaker_button
             text: ''
             md_bg_color: 1, 0, 1, app.speaker_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.speaker_note_y}
             on_press: app.buttonFunctionality(speaker_button, 'speaker_note_transparency')
 
@@ -64,8 +65,8 @@ ScreenManager:
             id: amp_button
             text: ''
             md_bg_color: 1, 0, 1, app.amp_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.amp_note_y}
             on_press: app.buttonFunctionality(amp_button, 'amp_note_transparency')
 
@@ -73,8 +74,8 @@ ScreenManager:
             id: lowest_note_button
             text: ''
             md_bg_color: 1, 0, 1, app.mid_field_lowest_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_lowest_note_y}
             on_press: app.buttonFunctionality(lowest_note_button, 'mid_field_lowest_note_transparency')
 
@@ -82,8 +83,8 @@ ScreenManager:
             id: low_note_button
             text: ''
             md_bg_color: 1, 0, 1, app.mid_field_low_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_low_note_y}
             on_press: app.buttonFunctionality(low_note_button, 'mid_field_low_note_transparency')
 
@@ -91,8 +92,8 @@ ScreenManager:
             id: mid_note_button
             text: ''
             md_bg_color: 1, 0, 1, app.mid_field_mid_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_mid_note_y}
             on_press: app.buttonFunctionality(mid_note_button, 'mid_field_mid_note_transparency')
 
@@ -100,8 +101,8 @@ ScreenManager:
             id: high_note_button
             text: ''
             md_bg_color: 1, 0, 1, app.mid_field_high_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_high_note_y}
             on_press: app.buttonFunctionality(high_note_button, 'mid_field_high_note_transparency')
 
@@ -109,8 +110,8 @@ ScreenManager:
             id: highest_note_button
             text: ''
             md_bg_color: 1, 0, 1, app.mid_field_highest_note_transparency
-            size_hint: None, None
-            size: 20, 20
+            size_hint_min: None, None
+            size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
             on_press: app.buttonFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
         MDRectangleFlatButton: # ********A********
@@ -119,7 +120,8 @@ ScreenManager:
             text_color: 0,0,0,1
             font_size: '15sp'
             md_bg_color: 0, 1, 0, app.A_area_transparency
-            size_hint: 0.19, 0.16
+            size_hint_min: None, None
+            size_hint: 0.19, 0.14
             pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
             on_press: app.buttonFunctionality(A_area, 'A_area_transparency')
         MDRectangleFlatButton: # ********B********
@@ -127,6 +129,7 @@ ScreenManager:
             text: 'B'
             text_color: 0,0,0,1
             md_bg_color: 0, 1, 0, app.B_area_transparency
+            size_hint_min: None, None
             size_hint: 0.19, 0.01
             pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
             on_press: app.buttonFunctionality(B_area, 'B_area_transparency')
@@ -135,6 +138,7 @@ ScreenManager:
             text: 'C'
             text_color: 0,0,0,1
             md_bg_color: 0, 1, 0, app.C_area_transparency
+            size_hint_min: None, None
             size_hint: 0.19, 0.05
             pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
             on_press: app.buttonFunctionality(C_area, 'C_area_transparency')
@@ -144,6 +148,7 @@ ScreenManager:
             text: 'D'
             text_color: 0,0,0,1
             md_bg_color: 0, 1, 0, app.D_area_transparency
+            size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
             on_press: app.buttonFunctionality(D_area, 'D_area_transparency')
@@ -253,10 +258,11 @@ ScreenManager:
             text_color: 1, 1, 1, 1
             on_press: root.manager.current = 'teleop_mid'
 
-
+#----------------------------------********Mid Game********-------------------------------------------
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
-
+    MDBoxLayout:
+#-----------------------------------*******End Game********--------------------------------------------
 <TeleopEndGamePeriod>:
     name: 'end'
 """
@@ -280,6 +286,7 @@ class TeleopEndGamePeriod(Screen):
 
 class ScoutingApp(MDApp):
     def build(self):
+
         self.close_note_line_x = 0.336
         self.far_note_line_x = 0.858
         self.area_x = 0.15
@@ -292,8 +299,8 @@ class ScoutingApp(MDApp):
         self.mid_field_mid_note_y = 0.78
         self.mid_field_high_note_y = 0.858
         self.mid_field_highest_note_y = 0.935
-        self.A_area_y = 0.7
-        self.B_area_y = 0.8
+        self.A_area_y = 0.695
+        self.B_area_y = 0.795
         self.C_area_y = 0.848
         self.D_area_y = 0.91
 
