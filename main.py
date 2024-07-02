@@ -22,7 +22,9 @@ ScreenManager:
         text_color: 0, 0, 0, 1
         md_bg_color: 1, 0, 1, 1
         pos_hint: {'center_x': 0.5, 'center_y': 0.07}
-        on_press: root.manager.current = 'autonomous_period'
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'autonomous_period'
     Image:
         source: "Sources/FRC_fild_Image.png"
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}
@@ -32,7 +34,7 @@ ScreenManager:
         pos_hint: {'center_x': 0.5, 'center_y': 0.77}
         size_hint: 0.95, 1
 
-#-----------------------------------*******Auto Game********----------------------------------------
+#-----------------------------------*******Auto Game********---------------------------------------------------
 <AutonomousPeriod>:
     name: 'autonomous_period'
     FloatLayout: 
@@ -174,13 +176,13 @@ ScreenManager:
             icon: "plus"
             pos_hint: {'center_x': 0.85, 'center_y': 0.37}
             md_bg_color: 0, 1, 0, 1
-            on_press: app.additionNote(note_in_amp, 'amp_count')
+            on_press: app.addition(note_in_amp, 'auto_amp_count')
 
         MDFloatingActionButton: # subtract button
             icon: "minus"
             md_bg_color: 1, 0, 0, 1
             pos_hint: {'center_x': 0.15, 'center_y': 0.37}
-            on_press: app.SubtractNote(note_in_amp, "amp_count")
+            on_press: app.SubtractNote(note_in_amp, "auto_amp_count")
 
         MDBoxLayout:
             pos_hint: {'center_x': 0.5, 'center_y': 0.37}
@@ -189,7 +191,7 @@ ScreenManager:
             radius: 20
             MDLabel:
                 id: note_in_amp
-                text: str(app.amp_count)
+                text: str(app.auto_amp_count)
                 halign: 'center'
                 font_size: "40sp"
                 pos_hint: {'center_x': 0.7, 'center_y': 0.5}
@@ -208,13 +210,13 @@ ScreenManager:
             icon: "plus"
             pos_hint: {'center_x': 0.85, 'center_y': 0.22}
             md_bg_color: 0, 1, 0, 1
-            on_press: app.additionNote(missed_note, "miss_count")
+            on_press: app.addition(missed_note, "auto_missed")
 
         MDFloatingActionButton: # subtract button
             icon: "minus"
             md_bg_color: 1, 0, 0, 1
             pos_hint: {'center_x': 0.15, 'center_y': 0.22}
-            on_press: app.SubtractNote(missed_note, 'miss_count')
+            on_press: app.SubtractNote(missed_note, 'auto_missed')
 
         MDBoxLayout:
             pos_hint: {'center_x': 0.5, 'center_y': 0.22}
@@ -223,7 +225,7 @@ ScreenManager:
             radius: 20
             MDLabel:
                 id: missed_note
-                text: str(app.miss_count)
+                text: str(app.auto_missed)
                 halign: 'center'
                 font_size: "40sp"
                 pos_hint: {'center_x': 0.7, 'center_y': 0.5}
@@ -256,12 +258,75 @@ ScreenManager:
             text: "Next"
             md_bg_color: 0, 0, 1, 1
             text_color: 1, 1, 1, 1
-            on_press: root.manager.current = 'teleop_mid'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'teleop_mid'
 
 #----------------------------------********Mid Game********-------------------------------------------
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
-    MDBoxLayout:
+    Image:
+        source: "Sources/speeker_POV.png"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.83}
+        size_hint: 0.89, 0.3
+        allow_stretch: True
+        keep_ratio: False
+    Image:
+        source: "Sources/Target_icon.png"
+        size_hint: None, None
+        size: [35,35]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+    MDRoundFlatButton: #scored button
+        text: ''
+        md_bg_color: 1, 0, 1, 0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+        size_hint: None, None
+        size: [35,35]
+        on_press: app.addition(speaker_current_situation,"teleop_speaker_scored")
+    Image:
+        source: "Sources/X_icon.png"
+        size_hint: None, None
+        size: [35,35]
+        pos_hint: {'center_x': 0.2, 'center_y': 0.9}
+    MDRoundFlatButton: #missed button
+        text: ''
+        md_bg_color: 1, 0, 1, 0
+        pos_hint: {'center_x': 0.2, 'center_y': 0.9}
+        size_hint: None, None
+        size: [35,35]
+        on_press: app.addition(speaker_current_situation,"teleop_speaker_missed")
+
+    MDLabel:
+        id: speaker_current_situation
+        text: app.teleop_speaker_current_situation
+        text_color: 1,1,1,1
+        pos_hint: {'center_x': 0.8,'center_y': 0.94}
+        halign: "center"
+
+        
+        # Next button
+    MDRectangleFlatButton:
+        pos_hint: {'center_x': 0.85, 'center_y': 0.05}
+        text: "Next"
+        md_bg_color: 0, 0, 1, 1
+        text_color: 1, 1, 1, 1
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'end'
+        # Back button
+    MDRectangleFlatButton:
+        pos_hint: {'center_x': 0.15, 'center_y': 0.05}
+        text: "Back"
+        md_bg_color: 1, 0, 0, 1
+        text_color: 1, 1, 1, 1
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'autonomous_period'
+
+                
+        
+
+
 #-----------------------------------*******End Game********--------------------------------------------
 <TeleopEndGamePeriod>:
     name: 'end'
@@ -286,6 +351,7 @@ class TeleopEndGamePeriod(Screen):
 
 class ScoutingApp(MDApp):
     def build(self):
+        self.theme_cls.theme_style = "Dark"
 
         self.close_note_line_x = 0.336
         self.far_note_line_x = 0.858
@@ -318,11 +384,15 @@ class ScoutingApp(MDApp):
         self.C_area_transparency = 0.1
         self.D_area_transparency = 0.1
 
-        self.amp_count = "0"
-        self.miss_count = "0"
-        self.robot_Passed_the_Line = False
-
-        self.theme_cls.theme_style = "Dark"
+        self.auto_amp_count = "0"
+        self.auto_missed = "0"
+        self.robot_Passed_the_Line = None
+        self.teleop_speaker_scored_count = "0"
+        self.teleop_amp_scored_count = "0"
+        self.teleop_speaker_missed_count = "0"
+        self.teleop_amp_missed_count = "0"
+        
+        self.teleop_speaker_current_situation = "scored: 0" + "\n" + "missed: 0"
 
         screen = Builder.load_string(KV)
         return screen
@@ -339,25 +409,37 @@ class ScoutingApp(MDApp):
         button.md_bg_color = (1, 0, 1, getattr(self, transparency_attr))
 
     def SubtractNote(self, label, SubtractFrom):
-        if SubtractFrom == "amp_count":
-            if int(self.amp_count) > 0:
-                self.amp_count = str(int(self.amp_count) - 1)
-            label.text = self.amp_count
+        if SubtractFrom == "auto_amp_count":
+            if int(self.auto_amp_count) > 0:
+                self.auto_amp_count = str(int(self.auto_amp_count) - 1)
+            label.text = self.auto_amp_count
         else:
-            if int(self.miss_count) > 0:
-                self.miss_count = str(int(self.miss_count) - 1)
-            label.text = self.miss_count
+            if int(self.auto_missed) > 0:
+                self.auto_missed = str(int(self.auto_missed) - 1)
+            label.text = self.auto_missed
 
-    def additionNote(self, label, addTo):
-        if addTo == "amp_count":
-            if int(self.amp_count) <= 7:
-                self.amp_count = str(int(self.amp_count) + 1)
-            label.text = self.amp_count
-        else:
-            if int(self.miss_count) <= 4:
-                self.miss_count = str(int(self.miss_count) + 1)
-            label.text = self.miss_count
-
+    def addition(self, label, addTo):
+        match addTo:
+            case "auto_amp_count":
+                if int(self.auto_amp_count) <= 7:
+                    self.auto_amp_count = str(int(self.auto_amp_count) + 1)
+                label.text = self.auto_amp_count
+            
+            case "auto_missed":
+                if int(self.auto_missed) <= 7:
+                    self.auto_missed = str(int(self.auto_missed) + 1)
+                label.text = self.auto_missed
+            
+            case "teleop_speaker_missed":
+                self.teleop_speaker_missed_count = str(int(self.teleop_speaker_missed_count) + 1)
+                self.teleop_speaker_current_situation = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
+                label.text = self.teleop_speaker_current_situation
+                
+            case "teleop_speaker_scored":
+              self.teleop_speaker_scored_count = str(int(self.teleop_speaker_scored_count) + 1)
+              self.teleop_speaker_current_situation = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
+              label.text = self.teleop_speaker_current_situation
+            
 
 if __name__ == "__main__":
     ScoutingApp().run()
