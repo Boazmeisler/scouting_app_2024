@@ -182,7 +182,7 @@ ScreenManager:
             icon: "minus"
             md_bg_color: 1, 0, 0, 1
             pos_hint: {'center_x': 0.15, 'center_y': 0.37}
-            on_press: app.SubtractNote(note_in_amp, "auto_amp_count")
+            on_press: app.subtract(note_in_amp, "auto_amp_count")
 
         MDBoxLayout:
             pos_hint: {'center_x': 0.5, 'center_y': 0.37}
@@ -191,7 +191,7 @@ ScreenManager:
             radius: 20
             MDLabel:
                 id: note_in_amp
-                text: str(app.auto_amp_count)
+                text: app.auto_amp_count
                 halign: 'center'
                 font_size: "40sp"
                 pos_hint: {'center_x': 0.7, 'center_y': 0.5}
@@ -216,7 +216,7 @@ ScreenManager:
             icon: "minus"
             md_bg_color: 1, 0, 0, 1
             pos_hint: {'center_x': 0.15, 'center_y': 0.22}
-            on_press: app.SubtractNote(missed_note, 'auto_missed')
+            on_press: app.subtract(missed_note, 'auto_missed')
 
         MDBoxLayout:
             pos_hint: {'center_x': 0.5, 'center_y': 0.22}
@@ -265,8 +265,9 @@ ScreenManager:
 #----------------------------------********Mid Game********-------------------------------------------
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
+#----------------------------------********speaker********---------------------------------------
     Image:
-        source: "Sources/speeker_POV.png"
+        source: "Sources/speaker_POV.png"
         pos_hint: {'center_x': 0.5, 'center_y': 0.83}
         size_hint: 0.89, 0.3
         allow_stretch: True
@@ -298,12 +299,82 @@ ScreenManager:
 
     MDLabel:
         id: speaker_current_situation
-        text: app.teleop_speaker_current_situation
+        text: app.teleop_current_display_stats
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.8,'center_y': 0.94}
         halign: "center"
+#----------------------------------********speaker********---------------------------------------
+    Image:
+        source: "Sources/AMP_POV.png"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        size_hint: 0.9, 0.3
+        allow_stretch: True
+        keep_ratio: False
+    Image:
+        source: "Sources/Target_icon.png"
+        size_hint: None, None
+        size: [35,35]
+        pos_hint: {'center_x': 0.51, 'center_y': 0.5}
+    MDRoundFlatButton: #scored button
+        text: ''
+        md_bg_color: 1, 0, 1, 0
+        pos_hint: {'center_x': 0.51, 'center_y': 0.5}
+        size_hint: None, None
+        size: [35,35]
+        on_press: app.addition(amp_current_situation,"teleop_amp_scored")
+    Image:
+        source: "Sources/X_icon.png"
+        size_hint: None, None
+        size: [35,35]
+        pos_hint: {'center_x': 0.15, 'center_y': 0.6}
+    MDRoundFlatButton: #missed button
+        text: ''
+        md_bg_color: 1, 0, 1, 0
+        pos_hint: {'center_x': 0.15, 'center_y': 0.6}
+        size_hint: None, None
+        size: [35,35]
+        on_press: app.addition(amp_current_situation,"teleop_amp_missed")
+    MDLabel:
+        id: amp_current_situation
+        text: app.teleop_current_display_stats
+        text_color: 1,1,1,1
+        pos_hint: {'center_x': 0.8,'center_y': 0.6}
+        halign: "center"
+#----------------------------------******delivery******----------------------------------
+    MDLabel:
+        text: "How much did the robot delivery:"
+        color: 1, 1, 1, 1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        padding: 15
+        font_size: "17sp"
+        halign: "center"
 
-        
+    MDFloatingActionButton: # add button
+        icon: "plus"
+        pos_hint: {'center_x': 0.85, 'center_y': 0.17}
+        md_bg_color: 0, 1, 0, 1
+        on_press: app.addition(delivery_display, "teleop_delivery_add")  
+
+    MDFloatingActionButton: # subtract button
+        icon: "minus"
+        md_bg_color: 1, 0, 0, 1
+        pos_hint: {'center_x': 0.15, 'center_y': 0.17}
+        on_press: app.subtract(delivery_display, 'teleop_delivery_subtract')
+
+
+    MDBoxLayout:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.17}
+        size_hint: 0.48, 0.08
+        md_bg_color: 1, 1, 1, 1
+        radius: 20
+        MDLabel:
+            id: delivery_display
+            text: app.teleop_delivery_count
+            halign: 'center'
+            font_size: "40sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 0, 0, 0, 1
+
         # Next button
     MDRectangleFlatButton:
         pos_hint: {'center_x': 0.85, 'center_y': 0.05}
@@ -391,8 +462,9 @@ class ScoutingApp(MDApp):
         self.teleop_amp_scored_count = "0"
         self.teleop_speaker_missed_count = "0"
         self.teleop_amp_missed_count = "0"
+        self.teleop_delivery_count = "0"
         
-        self.teleop_speaker_current_situation = "scored: 0" + "\n" + "missed: 0"
+        self.teleop_current_display_stats = "scored: 0" + "\n" + "missed: 0"
 
         screen = Builder.load_string(KV)
         return screen
@@ -408,15 +480,22 @@ class ScoutingApp(MDApp):
             setattr(self, transparency_attr, 1)
         button.md_bg_color = (1, 0, 1, getattr(self, transparency_attr))
 
-    def SubtractNote(self, label, SubtractFrom):
-        if SubtractFrom == "auto_amp_count":
-            if int(self.auto_amp_count) > 0:
-                self.auto_amp_count = str(int(self.auto_amp_count) - 1)
-            label.text = self.auto_amp_count
-        else:
-            if int(self.auto_missed) > 0:
-                self.auto_missed = str(int(self.auto_missed) - 1)
-            label.text = self.auto_missed
+    def subtract(self, label, subtractFrom):
+        match subtractFrom:
+            case "auto_amp_count":
+                if int(self.auto_amp_count) > 0:
+                    self.auto_amp_count = str(int(self.auto_amp_count) - 1)
+                label.text = self.auto_amp_count
+                
+            case "auto_missed":
+                if int(self.auto_missed) > 0:
+                    self.auto_missed = str(int(self.auto_missed) - 1)
+                label.text = self.auto_missed
+            
+            case "teleop_delivery_subtract":
+                if int(self.teleop_delivery_count) > 0:
+                    self.teleop_delivery_count = str(int(self.teleop_delivery_count) - 1)
+                    label.text = self.teleop_delivery_count
 
     def addition(self, label, addTo):
         match addTo:
@@ -432,14 +511,30 @@ class ScoutingApp(MDApp):
             
             case "teleop_speaker_missed":
                 self.teleop_speaker_missed_count = str(int(self.teleop_speaker_missed_count) + 1)
-                self.teleop_speaker_current_situation = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
-                label.text = self.teleop_speaker_current_situation
+                self.teleop_current_display_stats = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
+                label.text = self.teleop_current_display_stats
                 
             case "teleop_speaker_scored":
               self.teleop_speaker_scored_count = str(int(self.teleop_speaker_scored_count) + 1)
-              self.teleop_speaker_current_situation = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
-              label.text = self.teleop_speaker_current_situation
+              self.teleop_current_display_stats = "scored: " + self.teleop_speaker_scored_count + "\n" + "missed: " + self.teleop_speaker_missed_count
+              label.text = self.teleop_current_display_stats
             
+            case "teleop_amp_scored":
+                self.teleop_amp_scored_count = str(int(self.teleop_amp_scored_count) + 1)
+                self.teleop_current_display_stats = "scored: " + self.teleop_amp_scored_count + "\n" + "missed: " + self.teleop_amp_missed_count
+                label.text = self.teleop_current_display_stats
 
+            case "teleop_amp_missed":
+                self.teleop_amp_missed_count = str(int(self.teleop_amp_missed_count) + 1)
+                self.teleop_current_display_stats = "scored: " + self.teleop_amp_scored_count + "\n" + "missed: " + self.teleop_amp_missed_count
+                label.text = self.teleop_current_display_stats
+            
+            case "teleop_delivery_add":
+                self.teleop_delivery_count = str(int(self.teleop_delivery_count) + 1)
+                label.text = self.teleop_delivery_count
+              
+            
+            
+              
 if __name__ == "__main__":
     ScoutingApp().run()
