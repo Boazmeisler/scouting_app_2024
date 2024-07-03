@@ -1,9 +1,10 @@
 # main.py
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
+from Variables import Constants,DynamicVariables
 
 Window.size = (300, 630)
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
@@ -394,10 +395,6 @@ ScreenManager:
             root.manager.transition.direction = 'right'
             root.manager.current = 'autonomous_period'
 
-                
-        
-
-
 #-----------------------------------*******End Game********--------------------------------------------
 <TeleopEndGamePeriod>:
     name: 'end'
@@ -420,52 +417,9 @@ class TeleopEndGamePeriod(Screen):
     pass
 
 
-class ScoutingApp(MDApp):
+class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
-
-        self.close_note_line_x = 0.336
-        self.far_note_line_x = 0.858
-        self.area_x = 0.15
-
-        self.stage_note_y = 0.78
-        self.speaker_note_y = 0.848
-        self.amp_note_y = 0.915
-        self.mid_field_lowest_note_y = 0.624
-        self.mid_field_low_note_y = 0.702
-        self.mid_field_mid_note_y = 0.78
-        self.mid_field_high_note_y = 0.858
-        self.mid_field_highest_note_y = 0.935
-        self.A_area_y = 0.695
-        self.B_area_y = 0.795
-        self.C_area_y = 0.848
-        self.D_area_y = 0.91
-
-        # Set transparency levels
-        self.stage_note_transparency = 0.1
-        self.speaker_note_transparency = 0.1
-        self.amp_note_transparency = 0.1
-        self.mid_field_lowest_note_transparency = 0.1
-        self.mid_field_low_note_transparency = 0.1
-        self.mid_field_mid_note_transparency = 0.1
-        self.mid_field_high_note_transparency = 0.1
-        self.mid_field_highest_note_transparency = 0.1
-        self.A_area_transparency = 0.1
-        self.B_area_transparency = 0.1
-        self.C_area_transparency = 0.1
-        self.D_area_transparency = 0.1
-
-        self.auto_amp_count = "0"
-        self.auto_missed = "0"
-        self.robot_Passed_the_Line = None
-        self.teleop_speaker_scored_count = "0"
-        self.teleop_amp_scored_count = "0"
-        self.teleop_speaker_missed_count = "0"
-        self.teleop_amp_missed_count = "0"
-        self.teleop_delivery_count = "0"
-        
-        self.teleop_current_display_stats = "scored: 0" + "\n" + "missed: 0"
-
         screen = Builder.load_string(KV)
         return screen
 
