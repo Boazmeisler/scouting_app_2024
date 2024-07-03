@@ -52,7 +52,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045, 0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.stage_note_y}
-            on_press: app.buttonFunctionality(stage_button, 'stage_note_transparency')
+            on_press: app.autoSelectFunctionality(stage_button, 'stage_note_transparency')
 
         MDRectangleFlatButton: # speaker note
             id: speaker_button
@@ -61,7 +61,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.speaker_note_y}
-            on_press: app.buttonFunctionality(speaker_button, 'speaker_note_transparency')
+            on_press: app.autoSelectFunctionality(speaker_button, 'speaker_note_transparency')
 
         MDRectangleFlatButton: # amp note
             id: amp_button
@@ -70,7 +70,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.amp_note_y}
-            on_press: app.buttonFunctionality(amp_button, 'amp_note_transparency')
+            on_press: app.autoSelectFunctionality(amp_button, 'amp_note_transparency')
 
         MDRectangleFlatButton: # lowest note mid field
             id: lowest_note_button
@@ -79,7 +79,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_lowest_note_y}
-            on_press: app.buttonFunctionality(lowest_note_button, 'mid_field_lowest_note_transparency')
+            on_press: app.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_transparency')
 
         MDRectangleFlatButton: # low note mid field
             id: low_note_button
@@ -88,7 +88,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_low_note_y}
-            on_press: app.buttonFunctionality(low_note_button, 'mid_field_low_note_transparency')
+            on_press: app.autoSelectFunctionality(low_note_button, 'mid_field_low_note_transparency')
 
         MDRectangleFlatButton: # mid note mid field
             id: mid_note_button
@@ -97,7 +97,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_mid_note_y}
-            on_press: app.buttonFunctionality(mid_note_button, 'mid_field_mid_note_transparency')
+            on_press: app.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_transparency')
 
         MDRectangleFlatButton: # high mid field
             id: high_note_button
@@ -106,7 +106,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_high_note_y}
-            on_press: app.buttonFunctionality(high_note_button, 'mid_field_high_note_transparency')
+            on_press: app.autoSelectFunctionality(high_note_button, 'mid_field_high_note_transparency')
 
         MDRectangleFlatButton: # highest mid field
             id: highest_note_button
@@ -115,7 +115,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
-            on_press: app.buttonFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
+            on_press: app.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
         MDRectangleFlatButton: # ********A********
             id: A_area
             text: 'A'
@@ -125,7 +125,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.19, 0.14
             pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
-            on_press: app.buttonFunctionality(A_area, 'A_area_transparency')
+            on_press: app.autoSelectFunctionality(A_area, 'A_area_transparency')
         MDRectangleFlatButton: # ********B********
             id: B_area
             text: 'B'
@@ -134,7 +134,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.19, 0.01
             pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
-            on_press: app.buttonFunctionality(B_area, 'B_area_transparency')
+            on_press: app.autoSelectFunctionality(B_area, 'B_area_transparency')
         MDRectangleFlatButton: # ********C********
             id: C_area
             text: 'C'
@@ -143,7 +143,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.19, 0.05
             pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
-            on_press: app.buttonFunctionality(C_area, 'C_area_transparency')
+            on_press: app.autoSelectFunctionality(C_area, 'C_area_transparency')
             
         MDRectangleFlatButton: # ********D********
             id: D_area
@@ -153,7 +153,7 @@ ScreenManager:
             size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
-            on_press: app.buttonFunctionality(D_area, 'D_area_transparency')
+            on_press: app.autoSelectFunctionality(D_area, 'D_area_transparency')
 
         MDLabel:
             text: "Click on the notes that the robot managed to pick up"
@@ -472,7 +472,20 @@ class ScoutingApp(MDApp):
     def robotPassedLine(self, isPassedLine):
         self.robot_Passed_the_Line = isPassedLine
 
-    def buttonFunctionality(self, button, transparency_attr):
+    def disableNonSelectedArea(self,button):
+        match str(button):
+            case "A_area":
+                pass
+            
+            case "B_area":
+                pass
+            
+            case "C_area":
+                pass
+            
+            case "D_area":
+                pass
+    def autoSelectFunctionality(self, button, transparency_attr):
         current_transparency = getattr(self, transparency_attr, 0.1)
         if current_transparency == 1:
             setattr(self, transparency_attr, 0.1)
