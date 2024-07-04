@@ -43,12 +43,14 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
         Builder.load_string(home_KV)
         Builder.load_string(teleopMid_KV)
         Builder.load_string(teleopEnd_KV)
+        TeleopEndGamePeriod().create_widgets()
         
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
         sm.add_widget(TeleopMidGamePeriod(name = "teleop_mid"))
         sm.add_widget(TeleopEndGamePeriod(name = "end"))
+        
         return sm
 
     def robotPassedLine(self, isPassedLine):
