@@ -18,6 +18,9 @@ KV = """
 Builder.load_string(KV)
 
 class TeleopEndGamePeriod(Screen):
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.add_widget()
     def create_widgets(self):
         texts = [
             "Didn't try to climb",
