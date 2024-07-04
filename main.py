@@ -5,6 +5,9 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from Variables import Constants,DynamicVariables
+from Autonomous import KV as autonomous_KV
+from Home import KV as home_KV
+from TeleopMid import KV as teleopMid_KV
 
 Window.size = (300, 630)
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
@@ -16,386 +19,6 @@ ScreenManager:
     TeleopMidGamePeriod:
     TeleopEndGamePeriod:
 
-<HomeScreen>:
-    name: 'home'
-    MDRectangleFlatButton:
-        text: 'Start new scouting trip'
-        text_color: 0, 0, 0, 1
-        md_bg_color: 1, 0, 1, 1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.07}
-        on_press:
-            root.manager.transition.direction = 'left'
-            root.manager.current = 'autonomous_period'
-    Image:
-        source: "Sources/FRC_fild_Image.png"
-        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-        size_hint: 0.95, 1
-    Image:
-        source: "Sources/grop_logo.png"
-        pos_hint: {'center_x': 0.5, 'center_y': 0.77}
-        size_hint: 0.95, 1
-
-#-----------------------------------*******Auto Game********---------------------------------------------------
-<AutonomousPeriod>:
-    name: 'autonomous_period'
-    FloatLayout: 
-        Image:
-            source: "Sources/Blue_side.png"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.78}
-            size_hint: 0.89, 0.38
-            allow_stretch: True
-            keep_ratio: False
-
-        MDRectangleFlatButton: # stage note
-            id: stage_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.stage_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045, 0.02
-            pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.stage_note_y}
-            on_press: app.autoSelectFunctionality(stage_button, 'stage_note_transparency')
-
-        MDRectangleFlatButton: # speaker note
-            id: speaker_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.speaker_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.speaker_note_y}
-            on_press: app.autoSelectFunctionality(speaker_button, 'speaker_note_transparency')
-
-        MDRectangleFlatButton: # amp note
-            id: amp_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.amp_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.amp_note_y}
-            on_press: app.autoSelectFunctionality(amp_button, 'amp_note_transparency')
-
-        MDRectangleFlatButton: # lowest note mid field
-            id: lowest_note_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_lowest_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_lowest_note_y}
-            on_press: app.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_transparency')
-
-        MDRectangleFlatButton: # low note mid field
-            id: low_note_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_low_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_low_note_y}
-            on_press: app.autoSelectFunctionality(low_note_button, 'mid_field_low_note_transparency')
-
-        MDRectangleFlatButton: # mid note mid field
-            id: mid_note_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_mid_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_mid_note_y}
-            on_press: app.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_transparency')
-
-        MDRectangleFlatButton: # high mid field
-            id: high_note_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_high_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_high_note_y}
-            on_press: app.autoSelectFunctionality(high_note_button, 'mid_field_high_note_transparency')
-
-        MDRectangleFlatButton: # highest mid field
-            id: highest_note_button
-            text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_highest_note_transparency
-            size_hint_min: None, None
-            size_hint: 0.045,0.02
-            pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
-            on_press: app.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
-        MDRectangleFlatButton: # ********A********
-            id: A_area
-            text: 'A'
-            text_color: 0,0,0,1
-            font_size: '15sp'
-            md_bg_color: 0, 1, 0, app.A_area_transparency
-            size_hint_min: None, None
-            size_hint: 0.19, 0.14
-            pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
-            on_press: app.autoSelectFunctionality(A_area, 'A_area_transparency')
-        MDRectangleFlatButton: # ********B********
-            id: B_area
-            text: 'B'
-            text_color: 0,0,0,1
-            md_bg_color: 0, 1, 0, app.B_area_transparency
-            size_hint_min: None, None
-            size_hint: 0.19, 0.01
-            pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
-            on_press: app.autoSelectFunctionality(B_area, 'B_area_transparency')
-        MDRectangleFlatButton: # ********C********
-            id: C_area
-            text: 'C'
-            text_color: 0,0,0,1
-            md_bg_color: 0, 1, 0, app.C_area_transparency
-            size_hint_min: None, None
-            size_hint: 0.19, 0.05
-            pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
-            on_press: app.autoSelectFunctionality(C_area, 'C_area_transparency')
-            
-        MDRectangleFlatButton: # ********D********
-            id: D_area
-            text: 'D'
-            text_color: 0,0,0,1
-            md_bg_color: 0, 1, 0, app.D_area_transparency
-            size_hint_min: None, None
-            size_hint: 0.19, 0.07
-            pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
-            on_press: app.autoSelectFunctionality(D_area, 'D_area_transparency')
-
-        MDLabel:
-            text: "Click on the notes that the robot managed to pick up"
-            color: 1, 1, 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            padding: 20
-            font_size: "14sp"
-            halign: "center"
-
-        # Robot managed in to the amp section
-        MDLabel:
-            text: "How much did the robot manage into the amp:"
-            color: 1, 1, 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.46}
-            padding: 20
-            font_size: "14sp"
-            halign: "center"
-
-        MDFloatingActionButton: # add button
-            icon: "plus"
-            pos_hint: {'center_x': 0.85, 'center_y': 0.37}
-            md_bg_color: 0, 1, 0, 1
-            on_press: app.addition(note_in_amp, 'auto_amp_count')
-
-        MDFloatingActionButton: # subtract button
-            icon: "minus"
-            md_bg_color: 1, 0, 0, 1
-            pos_hint: {'center_x': 0.15, 'center_y': 0.37}
-            on_press: app.subtract(note_in_amp, "auto_amp_count")
-
-        MDBoxLayout:
-            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
-            size_hint: 0.48, 0.08
-            md_bg_color: 1, 1, 1, 1
-            radius: 20
-            MDLabel:
-                id: note_in_amp
-                text: app.auto_amp_count
-                halign: 'center'
-                font_size: "40sp"
-                pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-                color: 0, 0, 0, 1
-
-        # Robot missed section
-        MDLabel:
-            text: "How much did the robot miss:"
-            color: 1, 1, 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.29}
-            padding: 20
-            font_size: "14sp"
-            halign: "center"
-
-        MDFloatingActionButton: # add button
-            icon: "plus"
-            pos_hint: {'center_x': 0.85, 'center_y': 0.22}
-            md_bg_color: 0, 1, 0, 1
-            on_press: app.addition(missed_note, "auto_missed")
-
-        MDFloatingActionButton: # subtract button
-            icon: "minus"
-            md_bg_color: 1, 0, 0, 1
-            pos_hint: {'center_x': 0.15, 'center_y': 0.22}
-            on_press: app.subtract(missed_note, 'auto_missed')
-
-        MDBoxLayout:
-            pos_hint: {'center_x': 0.5, 'center_y': 0.22}
-            size_hint: 0.48, 0.08
-            md_bg_color: 1, 1, 1, 1
-            radius: 20
-            MDLabel:
-                id: missed_note
-                text: str(app.auto_missed)
-                halign: 'center'
-                font_size: "40sp"
-                pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-                color: 0, 0, 0, 1
-
-        # Robot passed the line section
-        MDLabel:
-            text: "Did the robot pass the line?"
-            color: 1, 1, 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-            padding: 20
-            font_size: "14sp"
-            halign: "center"
-
-        MDRaisedButton:
-            text: "Yes"
-            pos_hint: {'center_x': 0.32, 'center_y': 0.1}
-            md_bg_color: 0, 1, 0, 1
-            on_press: app.robotPassedLine(True)
-
-        MDRaisedButton:
-            text: "No"
-            pos_hint: {'center_x': 0.62, 'center_y': 0.1}
-            md_bg_color: 1, 0, 0, 1
-            on_press: app.robotPassedLine(False)
-
-        # Next button
-        MDRectangleFlatButton:
-            pos_hint: {'center_x': 0.85, 'center_y': 0.05}
-            text: "Next"
-            md_bg_color: 0, 0, 1, 1
-            text_color: 1, 1, 1, 1
-            on_press:
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'teleop_mid'
-
-#----------------------------------********Mid Game********-------------------------------------------
-<TeleopMidGamePeriod>:
-    name: 'teleop_mid'
-#----------------------------------********speaker********---------------------------------------
-    Image:
-        source: "Sources/speaker_POV.png"
-        pos_hint: {'center_x': 0.5, 'center_y': 0.83}
-        size_hint: 0.89, 0.3
-        allow_stretch: True
-        keep_ratio: False
-    Image:
-        source: "Sources/Target_icon.png"
-        size_hint: None, None
-        size: [35,35]
-        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-    MDRoundFlatButton: #scored button
-        text: ''
-        md_bg_color: 1, 0, 1, 0
-        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-        size_hint: None, None
-        size: [35,35]
-        on_press: app.addition(speaker_current_situation,"teleop_speaker_scored")
-    Image:
-        source: "Sources/X_icon.png"
-        size_hint: None, None
-        size: [35,35]
-        pos_hint: {'center_x': 0.2, 'center_y': 0.9}
-    MDRoundFlatButton: #missed button
-        text: ''
-        md_bg_color: 1, 0, 1, 0
-        pos_hint: {'center_x': 0.2, 'center_y': 0.9}
-        size_hint: None, None
-        size: [35,35]
-        on_press: app.addition(speaker_current_situation,"teleop_speaker_missed")
-
-    MDLabel:
-        id: speaker_current_situation
-        text: app.teleop_current_display_stats
-        text_color: 1,1,1,1
-        pos_hint: {'center_x': 0.8,'center_y': 0.94}
-        halign: "center"
-#----------------------------------********speaker********---------------------------------------
-    Image:
-        source: "Sources/AMP_POV.png"
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        size_hint: 0.9, 0.3
-        allow_stretch: True
-        keep_ratio: False
-    Image:
-        source: "Sources/Target_icon.png"
-        size_hint: None, None
-        size: [35,35]
-        pos_hint: {'center_x': 0.51, 'center_y': 0.5}
-    MDRoundFlatButton: #scored button
-        text: ''
-        md_bg_color: 1, 0, 1, 0
-        pos_hint: {'center_x': 0.51, 'center_y': 0.5}
-        size_hint: None, None
-        size: [35,35]
-        on_press: app.addition(amp_current_situation,"teleop_amp_scored")
-    Image:
-        source: "Sources/X_icon.png"
-        size_hint: None, None
-        size: [35,35]
-        pos_hint: {'center_x': 0.15, 'center_y': 0.6}
-    MDRoundFlatButton: #missed button
-        text: ''
-        md_bg_color: 1, 0, 1, 0
-        pos_hint: {'center_x': 0.15, 'center_y': 0.6}
-        size_hint: None, None
-        size: [35,35]
-        on_press: app.addition(amp_current_situation,"teleop_amp_missed")
-    MDLabel:
-        id: amp_current_situation
-        text: app.teleop_current_display_stats
-        text_color: 1,1,1,1
-        pos_hint: {'center_x': 0.8,'center_y': 0.6}
-        halign: "center"
-#----------------------------------******delivery******----------------------------------
-    MDLabel:
-        text: "How much did the robot delivery:"
-        color: 1, 1, 1, 1
-        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-        padding: 15
-        font_size: "17sp"
-        halign: "center"
-
-    MDFloatingActionButton: # add button
-        icon: "plus"
-        pos_hint: {'center_x': 0.85, 'center_y': 0.17}
-        md_bg_color: 0, 1, 0, 1
-        on_press: app.addition(delivery_display, "teleop_delivery_add")  
-
-    MDFloatingActionButton: # subtract button
-        icon: "minus"
-        md_bg_color: 1, 0, 0, 1
-        pos_hint: {'center_x': 0.15, 'center_y': 0.17}
-        on_press: app.subtract(delivery_display, 'teleop_delivery_subtract')
-
-
-    MDBoxLayout:
-        pos_hint: {'center_x': 0.5, 'center_y': 0.17}
-        size_hint: 0.48, 0.08
-        md_bg_color: 1, 1, 1, 1
-        radius: 20
-        MDLabel:
-            id: delivery_display
-            text: app.teleop_delivery_count
-            halign: 'center'
-            font_size: "40sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 0, 0, 0, 1
-
-        # Next button
-    MDRectangleFlatButton:
-        pos_hint: {'center_x': 0.85, 'center_y': 0.05}
-        text: "Next"
-        md_bg_color: 0, 0, 1, 1
-        text_color: 1, 1, 1, 1
-        on_press:
-            root.manager.transition.direction = 'left'
-            root.manager.current = 'end'
-        # Back button
-    MDRectangleFlatButton:
-        pos_hint: {'center_x': 0.15, 'center_y': 0.05}
-        text: "Back"
-        md_bg_color: 1, 0, 0, 1
-        text_color: 1, 1, 1, 1
-        on_press:
-            root.manager.transition.direction = 'right'
-            root.manager.current = 'autonomous_period'
-
-#-----------------------------------*******End Game********--------------------------------------------
 <TeleopEndGamePeriod>:
     name: 'end'
 """
@@ -419,7 +42,10 @@ class TeleopEndGamePeriod(Screen):
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        screen = Builder.load_string(KV)
+        Builder.load_string(KV)
+        Builder.load_string(autonomous_KV)
+        Builder.load_string(home_KV)
+        Builder.load_string(teleopMid_KV)
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
@@ -430,19 +56,14 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     def robotPassedLine(self, isPassedLine):
         self.robot_Passed_the_Line = isPassedLine
 
-    def disableNonSelectedArea(self,button):
-        match str(button):
-            case "A_area":
-                pass
-            
-            case "B_area":
-                pass
-            
-            case "C_area":
-                pass
-            
-            case "D_area":
-                pass
+
+    def autoStartAreaButtonFunctionality(self, disableArea, enableArea, transparency_attr):
+        setattr(self, transparency_attr[0], 1)
+        enableArea.md_bg_color = (1,0,1,getattr(self,transparency_attr[0]))
+        for i, j in zip(disableArea, range(1, 4)):
+            setattr(self, transparency_attr[j], 0.1)
+            i.md_bg_color = (1, 0, 1, getattr(self, transparency_attr[j]))
+
     def autoSelectFunctionality(self, button, transparency_attr):
         current_transparency = getattr(self, transparency_attr, 0.1)
         if current_transparency == 1:
@@ -450,6 +71,10 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
         else:
             setattr(self, transparency_attr, 1)
         button.md_bg_color = (1, 0, 1, getattr(self, transparency_attr))
+
+
+
+
 
     def subtract(self, label, subtractFrom):
         match subtractFrom:
