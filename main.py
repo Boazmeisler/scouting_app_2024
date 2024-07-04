@@ -62,9 +62,9 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     def autoStartAreaButtonFunctionality(self, disableArea, enableArea, transparency_attr):
         setattr(self, transparency_attr[0], 1)
         enableArea.md_bg_color = (1,0,1,getattr(self,transparency_attr[0]))
-        for i, j in zip(disableArea, transparency_attr[1:]):
-            setattr(self, j, 0.1)
-            i.md_bg_color = (1, 0, 1, getattr(self, j))
+        for i, j in zip(disableArea, range(1,4)):
+            setattr(self, transparency_attr[j], 0.1)
+            i.md_bg_color = (1, 0, 1, getattr(self, transparency_attr[j]))
 
 
     def autoSelectFunctionality(self, button, transparency_attr):

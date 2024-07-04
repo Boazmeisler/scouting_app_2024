@@ -1,5 +1,3 @@
-
-
 KV = """
 <TeleopEndGamePeriod>:
     name: 'end'
@@ -145,7 +143,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_press:
-            app.endGameButtonFunctionality(TrapInHarmony,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(TrapInHarmony, [DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
 
         # next button
     MDRectangleFlatButton:
