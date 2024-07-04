@@ -1,63 +1,169 @@
-from kivy.lang import Builder
-from kivymd.app import MDApp
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDRectangleFlatButton
-from kivy.uix.screenmanager import Screen
-# Your KV string
+
+
 KV = """
 <TeleopEndGamePeriod>:
     name: 'end'
     MDLabel:
-        text: "click on what append in the game"
-        pos_hint: {'center_x': 0.5,'center_y': 0.9}
+        text: "Click on what happened in the game"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
         halign: "center"
         font_size: "17sp"
+
+    MDBoxLayout:
+        id: DidntTry
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Didn't try to climb"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: TriedAndFail
+        pos_hint: {'center_x': 0.5, 'center_y': 0.67}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Tried to climb but failed"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: ClimbAlone
+        pos_hint: {'center_x': 0.5, 'center_y': 0.54}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Climb alone"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: ClimbInHarmony
+        pos_hint: {'center_x': 0.5, 'center_y': 0.41}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Climb in harmony"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: TrapAlone
+        pos_hint: {'center_x': 0.5, 'center_y': 0.28}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Trap alone"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: TrapInHarmony
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        size_hint: 0.9, None
+        size: [0,70]
+        md_bg_color: 1, 0, 0, 1
+        radius: 5
+        MDLabel:
+            text: "Trap in harmony"
+            halign: 'center'
+            font_size: "25sp"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            color: 1, 1, 1, 1
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+        on_press:
+            app.endGameButtonFunctionality(DidntTry,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.67}
+        on_press:
+            app.endGameButtonFunctionality(TriedAndFail,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.54}
+        on_press:
+            app.endGameButtonFunctionality(ClimbAlone,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.41}
+        on_press:
+            app.endGameButtonFunctionality(ClimbInHarmony,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.28}
+        on_press:
+            app.endGameButtonFunctionality(TrapAlone,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+    MDRectangleFlatButton:
+        md_bg_color: 0, 0, 0, 0
+        text: ""
+        size_hint: 0.9, None
+        size: [0,70]
+        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+        on_press:
+            app.endGameButtonFunctionality(TrapInHarmony,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+
+        # next button
+    MDRectangleFlatButton:
+        pos_hint: {'center_x': 0.85, 'center_y': 0.05}
+        text: "Next"
+        md_bg_color: 0, 0, 1, 1
+        text_color: 1, 1, 1, 1
+        on_press:
+            root.manager.transition.direction = 'left'
+          #  root.manager.current = 'end'
+        # Back button
+    MDRectangleFlatButton:
+        pos_hint: {'center_x': 0.15, 'center_y': 0.05}
+        text: "Back"
+        md_bg_color: 1, 0, 0, 1
+        text_color: 1, 1, 1, 1
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'teleop_mid'
+    
 """
-
-Builder.load_string(KV)
-
-class TeleopEndGamePeriod(Screen):
-    def __init__(self, **kw):
-        super().__init__(**kw)
-        self.add_widget()
-    def create_widgets(self):
-        texts = [
-            "Didn't try to climb",
-            "tried to climb but failed",
-            "climb alone",
-            "climb in harmony",
-            "trap alone",
-            "trap in harmony",
-        ]
-
-        y_level = [0.8, 0.67, 0.54, 0.41, 0.28, 0.15]
-
-        for i, text in enumerate(texts):
-            box = MDBoxLayout(
-                pos_hint={'center_x': 0.5, 'center_y': y_level[i]},
-                size_hint=(0.9, None),
-                size=[0, 70],
-                size_hint_min_y=None,
-                md_bg_color=(1, 0, 0, 1),
-                radius=[5]
-            )
-            label = MDLabel(
-                text=text,
-                halign='center',
-                font_size="25sp",
-                pos_hint={'center_x': 0.7, 'center_y': 0.5},
-                color=(1, 1, 1, 1)
-            )
-            box.add_widget(label)
-            self.add_widget(box)
-
-        for y in y_level:
-            button = MDRectangleFlatButton(
-                md_bg_color=(0, 0, 0, 0),
-                text="",
-                size_hint=(0.9, None),
-                size=[0, 70],
-                pos_hint={'center_x': 0.5, 'center_y': y}
-            )
-            self.add_widget(button)

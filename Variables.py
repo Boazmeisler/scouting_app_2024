@@ -17,7 +17,16 @@ class Constants():
     D_area_y = 0.91
 
 class DynamicVariables():
-            # Set transparency levels
+
+    isDidntTry = 0
+    isTriedAndFail = 0
+    isClimbAlone = 0
+    isClimbInHarmony = 0
+    isTrapAlone = 0
+    isTrapInHarmony = 0
+
+
+    # Set transparency levels
     stage_note_transparency = 0.1
     speaker_note_transparency = 0.1
     amp_note_transparency = 0.1
@@ -30,6 +39,7 @@ class DynamicVariables():
     B_area_transparency = 0.1
     C_area_transparency = 0.1
     D_area_transparency = 0.1
+
 
     auto_amp_count = "0"
     auto_missed = "0"
