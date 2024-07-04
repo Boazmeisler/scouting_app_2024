@@ -8,6 +8,8 @@ from Variables import Constants,DynamicVariables
 from Autonomous import KV as autonomous_KV
 from Home import KV as home_KV
 from TeleopMid import KV as teleopMid_KV
+from TeleopEnd import KV as teleopEnd_KV
+from TeleopEnd import TeleopEndGamePeriod
 
 Window.size = (300, 630)
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
@@ -33,9 +35,6 @@ class TeleopMidGamePeriod(Screen):
     pass
 
 
-class TeleopEndGamePeriod(Screen):
-    pass
-
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -43,6 +42,8 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
         Builder.load_string(autonomous_KV)
         Builder.load_string(home_KV)
         Builder.load_string(teleopMid_KV)
+        Builder.load_string(teleopEnd_KV)
+        
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
