@@ -18,9 +18,6 @@ ScreenManager:
     AutonomousPeriod:
     TeleopMidGamePeriod:
     TeleopEndGamePeriod:
-
-<TeleopEndGamePeriod>:
-    name: 'end'
 """
 
 
