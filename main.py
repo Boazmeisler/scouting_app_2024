@@ -416,12 +416,16 @@ class TeleopMidGamePeriod(Screen):
 class TeleopEndGamePeriod(Screen):
     pass
 
-
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
         screen = Builder.load_string(KV)
-        return screen
+        sm = ScreenManager()
+        sm.add_widget(HomeScreen(name = "home"))
+        sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
+        sm.add_widget(TeleopMidGamePeriod(name = "teleop_mid"))
+        sm.add_widget(TeleopEndGamePeriod(name = "end"))
+        return sm
 
     def robotPassedLine(self, isPassedLine):
         self.robot_Passed_the_Line = isPassedLine
