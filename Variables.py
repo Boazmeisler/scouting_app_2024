@@ -1,20 +1,20 @@
 class Constants():
-    close_note_line_x = 0.336
-    far_note_line_x = 0.858
-    area_x = 0.15
+    close_note_line_x = 0.664
+    far_note_line_x = 0.142
+    area_x = 0.85
 
-    stage_note_y = 0.78
-    speaker_note_y = 0.848
-    amp_note_y = 0.915
+    stage_note_y = 0.644
+    speaker_note_y = 0.712
+    amp_note_y = 0.779
     mid_field_lowest_note_y = 0.624
     mid_field_low_note_y = 0.702
     mid_field_mid_note_y = 0.78
     mid_field_high_note_y = 0.858
     mid_field_highest_note_y = 0.935
-    A_area_y = 0.695
-    B_area_y = 0.795
-    C_area_y = 0.848
-    D_area_y = 0.91
+    A_area_y = 0.87
+    B_area_y = 0.77
+    C_area_y = 0.71
+    D_area_y = 0.645
 
 class DynamicVariables():
 
@@ -51,4 +51,3 @@ class DynamicVariables():
     teleop_delivery_count = "0"
         
     teleop_current_display_stats = "scored: 0" + "\n" + "missed: 0"
-
