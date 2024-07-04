@@ -122,7 +122,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
-            on_press: app.autoStartAreaButtonFunctionality([B_area, C_area, C_area],D_area,["D_area_transparency","C_area_transparency","B_area_transparency","A_area_transparency"])
+            on_press: app.autoStartAreaButtonFunctionality([B_area, C_area, A_area],D_area,["D_area_transparency","C_area_transparency","B_area_transparency","A_area_transparency"])
             
 
 
