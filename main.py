@@ -58,12 +58,22 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     def robotPassedLine(self, isPassedLine):
         self.robot_Passed_the_Line = isPassedLine
 
-    def autoStartAreaButtonFunctionality(self, disableArea, enableArea, transparency_attr):
-        setattr(self, transparency_attr[0], 1)
-        enableArea.md_bg_color = (1,0,1,getattr(self,transparency_attr[0]))
-        for i, j in zip(disableArea, transparency_attr[1:]):
-            setattr(self, j, 0.1)
-            i.md_bg_color = (1, 0, 1, getattr(self, j))
+    def autoStartAreaButtonFunctionality(self, enableArea):
+        screen = self.root.get_screen('autonomous_period')
+        
+        transparency_attr = ["A_area_transparency", "B_area_transparency",
+                             "C_area_transparency", "D_area_transparency"]
+        
+        opinions = [screen.ids.A_area, screen.ids.B_area,
+                    screen.ids.C_area, screen.ids.D_area]
+        
+        for i, j in zip(opinions,transparency_attr):
+            if i == enableArea:
+                setattr(self, j, 1)
+                i.md_bg_color = (1,0,1,1)
+            else:
+                setattr(self, j, 0.1)
+                i.md_bg_color = (1,0,1,0.1)
 
 
     def autoSelectFunctionality(self, button, transparency_attr):
@@ -150,6 +160,27 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
             else:
                 setattr(screen, j, 0)
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
-
+class EndGame(MDApp):
+    def endGameButtonFunctionality(self, selected):
+        screen = self.root.get_screen('end')
+        opinions = [
+            screen.ids.DidntTry, screen.ids.TriedAndFail,
+            screen.ids.ClimbAlone, screen.ids.ClimbInHarmony,
+            screen.ids.TrapAlone, screen.ids.TrapInHarmony
+        ]
+        select_attr = [
+            "isDidntTry", "isTriedAndFail", "isClimbAlone",
+            "isClimbInHarmony", "isTrapAlone", "isTrapInHarmony"
+        ]
+        for i, j in zip(opinions, select_attr):
+            if i == selected:
+                setattr(screen, j, 1)
+                i.md_bg_color = (1, 0, 1, 1)  # Set color to indicate selection
+            else:
+                setattr(screen, j, 0)
+                i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
+                
+                
+                
 if __name__ == "__main__":
     ScoutingApp().run()

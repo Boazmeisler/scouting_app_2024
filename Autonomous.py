@@ -89,8 +89,8 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.14
             pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
-            on_press: app.autoStartAreaButtonFunctionality([B_area, C_area, D_area], A_area, ["A_area_transparency","C_area_transparency","B_area_transparency","D_area_transparency"]) #transparency_attr the firs element is the seleted one
-            
+            on_press: app.autoStartAreaButtonFunctionality(A_area) 
+ 
         MDRectangleFlatButton: # ********B********
             id: B_area
             text: 'B'
@@ -99,8 +99,8 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.01
             pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
-            on_press: app.autoStartAreaButtonFunctionality([A_area, C_area, D_area],B_area,["B_area_transparency","C_area_transparency","A_area_transparency","D_area_transparency"])
-            
+            on_press: app.autoStartAreaButtonFunctionality(B_area)
+ 
 
         MDRectangleFlatButton: # ********C********
             id: C_area
@@ -110,8 +110,8 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.05
             pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
-            on_press: app.autoStartAreaButtonFunctionality([B_area, A_area, D_area],C_area,["C_area_transparency","A_area_transparency","B_area_transparency","D_area_transparency"])
-            
+            on_press: app.autoStartAreaButtonFunctionality(C_area)
+ 
 
             
         MDRectangleFlatButton: # ********D********
@@ -122,8 +122,8 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
-            on_press: app.autoStartAreaButtonFunctionality([B_area, C_area, A_area],D_area,["D_area_transparency","C_area_transparency","B_area_transparency","A_area_transparency"])
-            
+            on_press: app.autoStartAreaButtonFunctionality(D_area)
+ 
 
 
         MDLabel:
