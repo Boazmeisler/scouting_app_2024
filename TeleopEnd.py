@@ -98,7 +98,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         on_press:
-            app.endGameButtonFunctionality(DidntTry,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(DidntTry)
 
     MDRectangleFlatButton:
         md_bg_color: 0, 0, 0, 0
@@ -107,7 +107,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.67}
         on_press:
-            app.endGameButtonFunctionality(TriedAndFail,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(TriedAndFail)
 
     MDRectangleFlatButton:
         md_bg_color: 0, 0, 0, 0
@@ -116,7 +116,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.54}
         on_press:
-            app.endGameButtonFunctionality(ClimbAlone,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(ClimbAlone)
 
     MDRectangleFlatButton:
         md_bg_color: 0, 0, 0, 0
@@ -125,7 +125,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.41}
         on_press:
-            app.endGameButtonFunctionality(ClimbInHarmony,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(ClimbInHarmony)
 
     MDRectangleFlatButton:
         md_bg_color: 0, 0, 0, 0
@@ -134,7 +134,7 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.28}
         on_press:
-            app.endGameButtonFunctionality(TrapAlone,[DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(TrapAlone)
 
     MDRectangleFlatButton:
         md_bg_color: 0, 0, 0, 0
@@ -143,9 +143,9 @@ KV = """
         size: [0,70]
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_press:
-            app.endGameButtonFunctionality(TrapInHarmony, [DidntTry,TriedAndFail,ClimbAlone,ClimbInHarmony,TrapAlone,TrapInHarmony])
+            app.endGameButtonFunctionality(TrapInHarmony)
 
-        # next button
+    # Next button
     MDRectangleFlatButton:
         pos_hint: {'center_x': 0.85, 'center_y': 0.05}
         text: "Next"
@@ -154,6 +154,7 @@ KV = """
         on_press:
             root.manager.transition.direction = 'left'
           #  root.manager.current = 'end'
+
         # Back button
     MDRectangleFlatButton:
         pos_hint: {'center_x': 0.15, 'center_y': 0.05}
@@ -163,5 +164,6 @@ KV = """
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'teleop_mid'
-    
+
+
 """

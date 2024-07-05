@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
+from kivy.properties import NumericProperty
 from Variables import Constants,DynamicVariables
 from Autonomous import KV as autonomous_KV
 from Home import KV as home_KV
@@ -30,14 +31,12 @@ class AutonomousPeriod(Screen):
     pass
 
 
-class TeleopEndGamePeriod(Screen):
-    pass
-
-
 class TeleopMidGamePeriod(Screen):
     pass
 
 
+class TeleopEndGamePeriod(Screen):
+    pass
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -62,9 +61,9 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     def autoStartAreaButtonFunctionality(self, disableArea, enableArea, transparency_attr):
         setattr(self, transparency_attr[0], 1)
         enableArea.md_bg_color = (1,0,1,getattr(self,transparency_attr[0]))
-        for i, j in zip(disableArea, range(1,4)):
-            setattr(self, transparency_attr[j], 0.1)
-            i.md_bg_color = (1, 0, 1, getattr(self, transparency_attr[j]))
+        for i, j in zip(disableArea, transparency_attr[1:]):
+            setattr(self, j, 0.1)
+            i.md_bg_color = (1, 0, 1, getattr(self, j))
 
 
     def autoSelectFunctionality(self, button, transparency_attr):
@@ -133,15 +132,24 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
                 label.text = self.teleop_delivery_count
               
 
-    def endGameButtonFunctionality(self, selected, opinions):
-        select_attr = ["isDidntTry","isTriedAndFail","isClimbAlone","isClimbInHarmony","isTrapAlone","isTrapInHarmony",]
-        for i,j in zip(opinions,select_attr):
+    def endGameButtonFunctionality(self, selected):
+        screen = self.root.get_screen('end')
+        opinions = [
+            screen.ids.DidntTry, screen.ids.TriedAndFail,
+            screen.ids.ClimbAlone, screen.ids.ClimbInHarmony,
+            screen.ids.TrapAlone, screen.ids.TrapInHarmony
+        ]
+        select_attr = [
+            "isDidntTry", "isTriedAndFail", "isClimbAlone",
+            "isClimbInHarmony", "isTrapAlone", "isTrapInHarmony"
+        ]
+        for i, j in zip(opinions, select_attr):
             if i == selected:
-                setattr(self, j, 1)
-                i.md_bg_color = (1, 0, getattr(self,j), 1)
+                setattr(screen, j, 1)
+                i.md_bg_color = (1, 0, 1, 1)  # Set color to indicate selection
             else:
-                setattr(self, j, 0)
-                i.md_bg_color = (1, 0, getattr(self,j), 1)
-              
+                setattr(screen, j, 0)
+                i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
+
 if __name__ == "__main__":
     ScoutingApp().run()
