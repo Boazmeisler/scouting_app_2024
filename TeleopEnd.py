@@ -7,140 +7,75 @@ KV = """
         halign: "center"
         font_size: "17sp"
 
-    MDBoxLayout:
-        id: DidntTry
-        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Didn't try to climb"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
-
-    MDBoxLayout:
-        id: TriedAndFail
-        pos_hint: {'center_x': 0.5, 'center_y': 0.67}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Tried to climb but failed"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
-
-    MDBoxLayout:
-        id: ClimbAlone
-        pos_hint: {'center_x': 0.5, 'center_y': 0.54}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Climb alone"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
-
-    MDBoxLayout:
-        id: ClimbInHarmony
-        pos_hint: {'center_x': 0.5, 'center_y': 0.41}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Climb in harmony"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
-
-    MDBoxLayout:
-        id: TrapAlone
-        pos_hint: {'center_x': 0.5, 'center_y': 0.28}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Trap alone"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
-
-    MDBoxLayout:
-        id: TrapInHarmony
-        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-        size_hint: 0.9, None
-        size: [0,70]
-        md_bg_color: 1, 0, 0, 1
-        radius: 5
-        MDLabel:
-            text: "Trap in harmony"
-            halign: 'center'
-            font_size: "25sp"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
-            color: 1, 1, 1, 1
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: DidntTry
+        md_bg_color: 1, 0, 0, 1
+        text: "Didn't try to climb"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         on_press:
             app.endGameButtonFunctionality(DidntTry)
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: TriedAndFail
+        md_bg_color: 1, 0, 0, 1
+        text: "Tried but failed"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.67}
         on_press:
             app.endGameButtonFunctionality(TriedAndFail)
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: ClimbAlone
+        md_bg_color: 1, 0, 0, 1
+        text: "Climb alone"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.54}
         on_press:
             app.endGameButtonFunctionality(ClimbAlone)
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: ClimbInHarmony
+        md_bg_color: 1, 0, 0, 1
+        text: "Climb in harmony"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.41}
         on_press:
             app.endGameButtonFunctionality(ClimbInHarmony)
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: TrapAlone
+        md_bg_color: 1, 0, 0, 1
+        text: "Trap alone"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.28}
         on_press:
             app.endGameButtonFunctionality(TrapAlone)
 
     MDRectangleFlatButton:
-        md_bg_color: 0, 0, 0, 0
-        text: ""
+        id: TrapInHarmony
+        md_bg_color: 1, 0, 0, 1
+        text: "Trap in harmony"
         size_hint: 0.9, None
         size: [0,70]
+        font_size: "25sp"
+        text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_press:
             app.endGameButtonFunctionality(TrapInHarmony)
@@ -153,7 +88,7 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
-          #  root.manager.current = 'end'
+            root.manager.current = 'general'
 
         # Back button
     MDRectangleFlatButton:

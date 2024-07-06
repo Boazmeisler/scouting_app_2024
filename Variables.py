@@ -18,6 +18,12 @@ class Constants():
 
 class DynamicVariables():
 
+    inputText = None
+
+    isDefend = False
+    isGetDefended = False
+    isNether = False
+
     isDidntTry = 0
     isTriedAndFail = 0
     isClimbAlone = 0

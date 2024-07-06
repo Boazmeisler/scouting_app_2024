@@ -4,24 +4,19 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
-from kivy.properties import NumericProperty
 from Variables import Constants,DynamicVariables
 from Autonomous import KV as autonomous_KV
 from Home import KV as home_KV
 from TeleopMid import KV as teleopMid_KV
 from TeleopEnd import KV as teleopEnd_KV
+from General import KV as general_KV
 
 Window.size = (300, 630)
+
+LabelBase.register(name='Arial', fn_regular="Sources/hebrew_arial_font.ttf")
+
 LabelBase.register(name="plus", fn_regular="Sources/plus_icon.svg")
 LabelBase.register(name="minus", fn_regular="Sources/minus_icon.svg")
-KV = """
-ScreenManager:
-    HomeScreen:
-    AutonomousPeriod:
-    TeleopMidGamePeriod:
-    TeleopEndGamePeriod:
-"""
-
 
 class HomeScreen(Screen):
     pass
@@ -37,21 +32,25 @@ class TeleopMidGamePeriod(Screen):
 
 class TeleopEndGamePeriod(Screen):
     pass
+
+class GeneralInformation(Screen):
+    pass
+
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        Builder.load_string(KV)
         Builder.load_string(autonomous_KV)
         Builder.load_string(home_KV)
         Builder.load_string(teleopMid_KV)
         Builder.load_string(teleopEnd_KV)
-        
+        Builder.load_string(general_KV)
         
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
         sm.add_widget(TeleopMidGamePeriod(name = "teleop_mid"))
         sm.add_widget(TeleopEndGamePeriod(name = "end"))
+        sm.add_widget(GeneralInformation(name = "general"))
         
         return sm
 
@@ -160,27 +159,25 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
             else:
                 setattr(screen, j, 0)
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
-class EndGame(MDApp):
-    def endGameButtonFunctionality(self, selected):
-        screen = self.root.get_screen('end')
+
+    def defendSectionButtonFunctionality(self, selected):
+        screen = self.root.get_screen('general')
         opinions = [
-            screen.ids.DidntTry, screen.ids.TriedAndFail,
-            screen.ids.ClimbAlone, screen.ids.ClimbInHarmony,
-            screen.ids.TrapAlone, screen.ids.TrapInHarmony
-        ]
+            screen.ids.defend, screen.ids.getDefended, screen.ids.neither]
         select_attr = [
-            "isDidntTry", "isTriedAndFail", "isClimbAlone",
-            "isClimbInHarmony", "isTrapAlone", "isTrapInHarmony"
-        ]
+            "isDefend", "isGetDefended", "isNether"]
+        
         for i, j in zip(opinions, select_attr):
             if i == selected:
-                setattr(screen, j, 1)
-                i.md_bg_color = (1, 0, 1, 1)  # Set color to indicate selection
+                setattr(screen, j, True)
+                i.md_bg_color = (0, 1, 0, 1)  # Set color to indicate selection
             else:
-                setattr(screen, j, 0)
+                setattr(screen, j, False)
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
-                
-                
+    
+    def rememberText(self, textFild):
+        if(textFild.text != ""):
+            self.inputText = textFild.text
                 
 if __name__ == "__main__":
     ScoutingApp().run()
