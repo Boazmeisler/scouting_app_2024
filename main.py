@@ -177,7 +177,8 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     
     def rememberText(self, textFild):
         if(textFild.text != ""):
-            self.inputText = textFild.text
-                
+            self.inputText = textFild.text[::-1]
+
+            
 if __name__ == "__main__":
     ScoutingApp().run()
