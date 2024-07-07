@@ -1,3 +1,5 @@
+from kivy.lang import Builder
+
 KV = """
 <HomeScreen>:
     name: 'home'
@@ -18,3 +20,5 @@ KV = """
         pos_hint: {'center_x': 0.5, 'center_y': 0.77}
         size_hint: 0.95, 1
 """
+
+Builder.load_string(KV)

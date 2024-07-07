@@ -1,3 +1,6 @@
+from kivy.lang import Builder
+
+
 KV = """
 <AutonomousPeriod>:
     name: 'autonomous_period'
@@ -236,3 +239,5 @@ KV = """
                 root.manager.current = 'teleop_mid'
 
 """
+
+Builder.load_string(KV)

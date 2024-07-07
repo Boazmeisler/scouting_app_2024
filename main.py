@@ -39,12 +39,7 @@ class GeneralInformation(Screen):
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        Builder.load_string(autonomous_KV)
-        Builder.load_string(home_KV)
-        Builder.load_string(teleopMid_KV)
-        Builder.load_string(teleopEnd_KV)
-        Builder.load_string(general_KV)
-        
+
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
@@ -83,12 +78,13 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
 
 
     def autoSelectFunctionality(self, button, transparency_attr):
-        current_transparency = getattr(self, transparency_attr, 0.1)
-        if current_transparency == 1:
-            setattr(self, transparency_attr, 0.1)
+        current_transparency = getattr(self, transparency_attr)
+        if current_transparency:
+            setattr(self, transparency_attr, False)
+            button.md_bg_color = (1, 0, 1, 0.1)
         else:
-            setattr(self, transparency_attr, 1)
-        button.md_bg_color = (1, 0, 1, getattr(self, transparency_attr))
+            setattr(self, transparency_attr, True)
+            button.md_bg_color = (1, 0, 1, 1)
 
 
 

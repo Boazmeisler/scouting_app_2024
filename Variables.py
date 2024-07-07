@@ -33,18 +33,18 @@ class DynamicVariables():
 
 
     # Set transparency levels
-    stage_note_transparency = 0.1
-    speaker_note_transparency = 0.1
-    amp_note_transparency = 0.1
-    mid_field_lowest_note_transparency = 0.1
-    mid_field_low_note_transparency = 0.1
-    mid_field_mid_note_transparency = 0.1
-    mid_field_high_note_transparency = 0.1
-    mid_field_highest_note_transparency = 0.1
-    A_area_transparency = 0.1
-    B_area_transparency = 0.1
-    C_area_transparency = 0.1
-    D_area_transparency = 0.1
+    stage_note_transparency = False
+    speaker_note_transparency = False
+    amp_note_transparency = False
+    mid_field_lowest_note_transparency = False
+    mid_field_low_note_transparency = False
+    mid_field_mid_note_transparency = False
+    mid_field_high_note_transparency = False
+    mid_field_highest_note_transparency = False
+    A_area_transparency = False
+    B_area_transparency = False
+    C_area_transparency = False
+    D_area_transparency = False
 
 
     auto_amp_count = "0"

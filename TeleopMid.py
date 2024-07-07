@@ -1,3 +1,6 @@
+from kivy.lang import Builder
+
+
 KV ="""
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
@@ -129,5 +132,6 @@ KV ="""
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'autonomous_period'
-
 """
+
+Builder.load_string(KV)

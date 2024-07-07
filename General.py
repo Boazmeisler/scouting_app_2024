@@ -1,3 +1,6 @@
+from kivy.lang import Builder
+
+
 KV = """
 <GeneralInformation>:
     name: "general"
@@ -71,8 +74,7 @@ KV = """
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'end'
-
-
 """
 
 
+Builder.load_string(KV)
