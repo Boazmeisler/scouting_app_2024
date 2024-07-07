@@ -212,16 +212,18 @@ KV = """
             halign: "center"
 
         MDRaisedButton:
+            id: passLine
             text: "Yes"
             pos_hint: {'center_x': 0.32, 'center_y': 0.1}
-            md_bg_color: 0, 1, 0, 1
-            on_press: app.robotPassedLine(True)
+            md_bg_color: 1, 0, 0, 1
+            on_press: app.robotPassedLine(True,passLine)
 
         MDRaisedButton:
+            id: didntPassLine
             text: "No"
             pos_hint: {'center_x': 0.62, 'center_y': 0.1}
             md_bg_color: 1, 0, 0, 1
-            on_press: app.robotPassedLine(False)
+            on_press: app.robotPassedLine(False,didntPassLine)
 
         # Next button
         MDRectangleFlatButton:

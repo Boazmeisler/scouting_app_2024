@@ -54,9 +54,16 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
         
         return sm
 
-    def robotPassedLine(self, isPassedLine):
+    def robotPassedLine(self, isPassedLine, button):
+        screen = self.root.get_screen('autonomous_period')
         self.robot_Passed_the_Line = isPassedLine
-
+        if isPassedLine:
+            screen.ids.didntPassLine.md_bg_color = (1,0,0,1)
+            screen.ids.passLine.md_bg_color = (0,1,0,1)
+        else:
+            screen.ids.didntPassLine.md_bg_color = (0,1,0,1)
+            screen.ids.passLine.md_bg_color = (1,0,0,1)
+            
     def autoStartAreaButtonFunctionality(self, enableArea):
         screen = self.root.get_screen('autonomous_period')
         
