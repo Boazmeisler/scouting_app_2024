@@ -5,11 +5,12 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from Variables import Constants,DynamicVariables
-from Autonomous import KV as autonomous_KV
-from Home import KV as home_KV
-from TeleopMid import KV as teleopMid_KV
-from TeleopEnd import KV as teleopEnd_KV
-from General import KV as general_KV
+from Autonomous import KV
+from Home import KV
+from TeleopMid import KV
+from TeleopEnd import KV
+from General import KV
+from PreScout import KV
 
 Window.size = (300, 630)
 
@@ -21,6 +22,8 @@ LabelBase.register(name="minus", fn_regular="Sources/minus_icon.svg")
 class HomeScreen(Screen):
     pass
 
+class PreScouting(Screen):
+    pass
 
 class AutonomousPeriod(Screen):
     pass
@@ -33,8 +36,11 @@ class TeleopMidGamePeriod(Screen):
 class TeleopEndGamePeriod(Screen):
     pass
 
+
 class GeneralInformation(Screen):
     pass
+
+
 
 class ScoutingApp(MDApp,Constants,DynamicVariables):
     def build(self):
@@ -42,6 +48,7 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
 
         sm = ScreenManager()
         sm.add_widget(HomeScreen(name = "home"))
+        sm.add_widget(PreScouting(name = "preScout"))
         sm.add_widget(AutonomousPeriod(name = "autonomous_period"))
         sm.add_widget(TeleopMidGamePeriod(name = "teleop_mid"))
         sm.add_widget(TeleopEndGamePeriod(name = "end"))
@@ -62,13 +69,13 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
     def autoStartAreaButtonFunctionality(self, enableArea):
         screen = self.root.get_screen('autonomous_period')
         
-        transparency_attr = ["A_area_transparency", "B_area_transparency",
-                             "C_area_transparency", "D_area_transparency"]
+        selected_attr = ["A_area_selected   ", "B_area_selected",
+                         "C_area_selected   ", "D_area_selected"]
         
         opinions = [screen.ids.A_area, screen.ids.B_area,
                     screen.ids.C_area, screen.ids.D_area]
         
-        for i, j in zip(opinions,transparency_attr):
+        for i, j in zip(opinions,selected_attr):
             if i == enableArea:
                 setattr(self, j, 1)
                 i.md_bg_color = (1,0,1,1)
@@ -77,17 +84,14 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
                 i.md_bg_color = (1,0,1,0.1)
 
 
-    def autoSelectFunctionality(self, button, transparency_attr):
-        current_transparency = getattr(self, transparency_attr)
-        if current_transparency:
-            setattr(self, transparency_attr, False)
+    def autoSelectFunctionality(self, button, selected_attr):
+        current_selected = getattr(self, selected_attr)
+        if current_selected:
+            setattr(self, selected_attr, False)
             button.md_bg_color = (1, 0, 1, 0.1)
         else:
-            setattr(self, transparency_attr, True)
+            setattr(self, selected_attr, True)
             button.md_bg_color = (1, 0, 1, 1)
-
-
-
 
 
     def subtract(self, label, subtractFrom):
@@ -179,8 +183,14 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
     
     def rememberText(self, textFild):
-        if(textFild.text != ""):
-            self.inputText = textFild.text[::-1]
+        self.inputText = textFild.text[::-1]
+    
+    def rememberPreScout(self):
+        screen = self.root.get_screen('preScout')
+        self.scouterName = screen.ids.scouter_name.text[::-1]
+        self.groupNumber = screen.ids.group_num.text
+        self.qualificationNumber = screen.ids.qualification_num.text
+
 
             
 if __name__ == "__main__":
