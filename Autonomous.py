@@ -15,80 +15,80 @@ KV = """
         MDRectangleFlatButton: # stage note
             id: stage_button
             text: ''
-            md_bg_color: 1, 0, 1, app.stage_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045, 0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.stage_note_y}
-            on_press: app.autoSelectFunctionality(stage_button, 'stage_note_transparency')
+            on_press: app.autoSelectFunctionality(stage_button, 'stage_note_selected')
 
         MDRectangleFlatButton: # speaker note
             id: speaker_button
             text: ''
-            md_bg_color: 1, 0, 1, app.speaker_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.speaker_note_y}
-            on_press: app.autoSelectFunctionality(speaker_button, 'speaker_note_transparency')
+            on_press: app.autoSelectFunctionality(speaker_button, 'speaker_note_selected')
 
         MDRectangleFlatButton: # amp note
             id: amp_button
             text: ''
-            md_bg_color: 1, 0, 1, app.amp_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.amp_note_y}
-            on_press: app.autoSelectFunctionality(amp_button, 'amp_note_transparency')
+            on_press: app.autoSelectFunctionality(amp_button, 'amp_note_selected')
 
         MDRectangleFlatButton: # lowest note mid field
             id: lowest_note_button
             text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_lowest_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_lowest_note_y}
-            on_press: app.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_transparency')
+            on_press: app.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_selected')
 
         MDRectangleFlatButton: # low note mid field
             id: low_note_button
             text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_low_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_low_note_y}
-            on_press: app.autoSelectFunctionality(low_note_button, 'mid_field_low_note_transparency')
+            on_press: app.autoSelectFunctionality(low_note_button, 'mid_field_low_note_selected')
 
         MDRectangleFlatButton: # mid note mid field
             id: mid_note_button
             text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_mid_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_mid_note_y}
-            on_press: app.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_transparency')
+            on_press: app.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_selected')
 
         MDRectangleFlatButton: # high mid field
             id: high_note_button
             text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_high_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_high_note_y}
-            on_press: app.autoSelectFunctionality(high_note_button, 'mid_field_high_note_transparency')
+            on_press: app.autoSelectFunctionality(high_note_button, 'mid_field_high_note_selected')
 
         MDRectangleFlatButton: # highest mid field
             id: highest_note_button
             text: ''
-            md_bg_color: 1, 0, 1, app.mid_field_highest_note_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
-            on_press: app.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_transparency')
+            on_press: app.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_selected')
         MDRectangleFlatButton: # ********A********
             id: A_area
             text: 'A'
             text_color: 0,0,0,1
             font_size: '15sp'
-            md_bg_color: 1, 0, 1, app.A_area_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.19, 0.14
             pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
@@ -98,7 +98,7 @@ KV = """
             id: B_area
             text: 'B'
             text_color: 0,0,0,1
-            md_bg_color: 1, 0, 1, app.B_area_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.19, 0.01
             pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
@@ -109,7 +109,7 @@ KV = """
             id: C_area
             text: 'C'
             text_color: 0,0,0,1
-            md_bg_color: 1, 0, 1, app.C_area_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.19, 0.05
             pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
@@ -121,7 +121,7 @@ KV = """
             id: D_area
             text: 'D'
             text_color: 0,0,0,1
-            md_bg_color: 1, 0, 1, app.D_area_transparency
+            md_bg_color: 1, 0, 1, 0.1
             size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}

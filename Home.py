@@ -10,7 +10,7 @@ KV = """
         pos_hint: {'center_x': 0.5, 'center_y': 0.07}
         on_press:
             root.manager.transition.direction = 'left'
-            root.manager.current = 'autonomous_period'
+            root.manager.current = 'preScout'
     Image:
         source: "Sources/FRC_fild_Image.png"
         pos_hint: {'center_x': 0.5, 'center_y': 0.35}

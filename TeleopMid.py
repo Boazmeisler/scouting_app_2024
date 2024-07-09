@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 
 
-KV ="""
+KV = """
 <TeleopMidGamePeriod>:
     name: 'teleop_mid'
 #----------------------------------********speaker********---------------------------------------
