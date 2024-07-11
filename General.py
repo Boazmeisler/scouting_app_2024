@@ -1,4 +1,7 @@
 from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
+from kivy.app import App
+from Variables import DynamicVariables, Constants
 
 
 KV = """
@@ -22,7 +25,7 @@ KV = """
         md_bg_color: 1,0,0,1
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.85,'center_y': 0.4}
-        on_press: app.defendSectionButtonFunctionality(defend)
+        on_press: root.defendSectionButtonFunctionality(defend)
 
     MDRectangleFlatButton:
         id: getDefended
@@ -30,7 +33,7 @@ KV = """
         md_bg_color: 1,0,0,1
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5,'center_y': 0.4}
-        on_press: app.defendSectionButtonFunctionality(getDefended)
+        on_press: root.defendSectionButtonFunctionality(getDefended)
 
     MDRectangleFlatButton:
         id: neither
@@ -38,7 +41,7 @@ KV = """
         md_bg_color: 1,0,0,1
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.15,'center_y': 0.4}
-        on_press: app.defendSectionButtonFunctionality(neither)
+        on_press: root.defendSectionButtonFunctionality(neither)
 
     MDLabel:
         text: "something to add?"
@@ -62,8 +65,8 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
-            app.rememberText(addInformation)
-  #          root.manager.current = 'general'
+            root.rememberText(addInformation)
+            app.println()
 
         # Back button
     MDRectangleFlatButton:
@@ -78,3 +81,28 @@ KV = """
 
 
 Builder.load_string(KV)
+
+class GeneralInformation(Screen, DynamicVariables, Constants):
+    def on_enter(self):
+        self.app = App.get_running_app()
+        self.screen = self.app.root.get_screen('general')
+
+
+    def defendSectionButtonFunctionality(self, selected):
+        opinions = [
+            self.screen.ids.defend, self.screen.ids.getDefended, self.screen.ids.neither]
+        select_attr = [
+            "isDefend", "isGetDefended", "isNether"]
+        
+        for i, j in zip(opinions, select_attr):
+            if i == selected:
+                setattr(self.screen, j, True)
+                i.md_bg_color = (0, 1, 0, 1)  # Set color to indicate selection
+            else:
+                setattr(self.screen, j, False)
+                i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
+    
+
+    def rememberText(self, textFild):
+        self.inputText = textFild.text[::-1]
+    

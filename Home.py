@@ -1,4 +1,6 @@
 from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
+
 
 KV = """
 <HomeScreen>:
@@ -22,3 +24,7 @@ KV = """
 """
 
 Builder.load_string(KV)
+
+
+class HomeScreen(Screen):
+    pass

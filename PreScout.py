@@ -1,4 +1,8 @@
 from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
+from kivy.app import App
+from Variables import DynamicVariables, Constants
+
 
 KV = """
 <PreScouting>:
@@ -49,8 +53,23 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
-            app.rememberPreScout()
+            root.rememberPreScout()
             root.manager.current = 'autonomous_period'
 """
 
 Builder.load_string(KV)
+
+
+class PreScouting(Screen, DynamicVariables, Constants):
+
+
+    def on_enter(self):
+        self.app = App.get_running_app()
+        self.screen = self.app.root.get_screen('preScout')
+
+
+    def rememberPreScout(self):
+        self.scouterName = self.screen.ids.scouter_name.text[::-1]
+        self.groupNumber = self.screen.ids.group_num.text
+        self.qualificationNumber = self.screen.ids.qualification_num.text
+

@@ -1,4 +1,8 @@
 from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
+from Variables import DynamicVariables, Constants
+from kivy.app import App
+
 
 KV = """
 <TeleopEndGamePeriod>:
@@ -20,7 +24,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.8}
         on_press:
-            app.endGameButtonFunctionality(DidntTry)
+            root.endGameButtonFunctionality(DidntTry)
 
     MDRectangleFlatButton:
         id: TriedAndFail
@@ -32,7 +36,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.67}
         on_press:
-            app.endGameButtonFunctionality(TriedAndFail)
+            root.endGameButtonFunctionality(TriedAndFail)
 
     MDRectangleFlatButton:
         id: ClimbAlone
@@ -44,7 +48,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.54}
         on_press:
-            app.endGameButtonFunctionality(ClimbAlone)
+            root.endGameButtonFunctionality(ClimbAlone)
 
     MDRectangleFlatButton:
         id: ClimbInHarmony
@@ -56,7 +60,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.41}
         on_press:
-            app.endGameButtonFunctionality(ClimbInHarmony)
+            root.endGameButtonFunctionality(ClimbInHarmony)
 
     MDRectangleFlatButton:
         id: TrapAlone
@@ -68,7 +72,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.28}
         on_press:
-            app.endGameButtonFunctionality(TrapAlone)
+            root.endGameButtonFunctionality(TrapAlone)
 
     MDRectangleFlatButton:
         id: TrapInHarmony
@@ -80,7 +84,7 @@ KV = """
         text_color: 1,1,1,1
         pos_hint: {'center_x': 0.5, 'center_y': 0.15}
         on_press:
-            app.endGameButtonFunctionality(TrapInHarmony)
+            root.endGameButtonFunctionality(TrapInHarmony)
 
     # Next button
     MDRectangleFlatButton:
@@ -104,3 +108,29 @@ KV = """
 """
 
 Builder.load_string(KV)
+
+class TeleopEndGamePeriod(Screen, DynamicVariables, Constants):
+    
+
+    def on_enter(self):
+            self.app = App.get_running_app()
+            self.screen = self.app.root.get_screen('end')
+
+
+    def endGameButtonFunctionality(self, selected):
+        opinions = [
+            self.screen.ids.DidntTry, self.screen.ids.TriedAndFail,
+            self.screen.ids.ClimbAlone, self.screen.ids.ClimbInHarmony,
+            self.screen.ids.TrapAlone, self.screen.ids.TrapInHarmony
+        ]
+        select_attr = [
+            "isDidntTry", "isTriedAndFail", "isClimbAlone",
+            "isClimbInHarmony", "isTrapAlone", "isTrapInHarmony"
+        ]
+        for i, j in zip(opinions, select_attr):
+            if i == selected:
+                setattr(self.screen, j, 1)
+                i.md_bg_color = (1, 0, 1, 1)  # Set color to indicate selection
+            else:
+                setattr(self.screen, j, 0)
+                i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection

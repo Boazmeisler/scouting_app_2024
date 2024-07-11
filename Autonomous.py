@@ -1,5 +1,7 @@
 from kivy.lang import Builder
-
+from kivy.uix.screenmanager import Screen
+from kivy.app import App
+from Variables import DynamicVariables, Constants
 
 KV = """
 <AutonomousPeriod>:
@@ -19,7 +21,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045, 0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.stage_note_y}
-            on_press: app.autoSelectFunctionality(stage_button, 'stage_note_selected')
+            on_press: root.autoSelectFunctionality(stage_button, 'stage_note_selected')
 
         MDRectangleFlatButton: # speaker note
             id: speaker_button
@@ -28,7 +30,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.speaker_note_y}
-            on_press: app.autoSelectFunctionality(speaker_button, 'speaker_note_selected')
+            on_press: root.autoSelectFunctionality(speaker_button, 'speaker_note_selected')
 
         MDRectangleFlatButton: # amp note
             id: amp_button
@@ -37,7 +39,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.close_note_line_x, 'center_y': app.amp_note_y}
-            on_press: app.autoSelectFunctionality(amp_button, 'amp_note_selected')
+            on_press: root.autoSelectFunctionality(amp_button, 'amp_note_selected')
 
         MDRectangleFlatButton: # lowest note mid field
             id: lowest_note_button
@@ -46,7 +48,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_lowest_note_y}
-            on_press: app.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_selected')
+            on_press: root.autoSelectFunctionality(lowest_note_button, 'mid_field_lowest_note_selected')
 
         MDRectangleFlatButton: # low note mid field
             id: low_note_button
@@ -55,7 +57,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_low_note_y}
-            on_press: app.autoSelectFunctionality(low_note_button, 'mid_field_low_note_selected')
+            on_press: root.autoSelectFunctionality(low_note_button, 'mid_field_low_note_selected')
 
         MDRectangleFlatButton: # mid note mid field
             id: mid_note_button
@@ -64,7 +66,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_mid_note_y}
-            on_press: app.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_selected')
+            on_press: root.autoSelectFunctionality(mid_note_button, 'mid_field_mid_note_selected')
 
         MDRectangleFlatButton: # high mid field
             id: high_note_button
@@ -73,7 +75,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_high_note_y}
-            on_press: app.autoSelectFunctionality(high_note_button, 'mid_field_high_note_selected')
+            on_press: root.autoSelectFunctionality(high_note_button, 'mid_field_high_note_selected')
 
         MDRectangleFlatButton: # highest mid field
             id: highest_note_button
@@ -82,7 +84,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.045,0.02
             pos_hint: {'center_x': app.far_note_line_x, 'center_y': app.mid_field_highest_note_y}
-            on_press: app.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_selected')
+            on_press: root.autoSelectFunctionality(highest_note_button, 'mid_field_highest_note_selected')
         MDRectangleFlatButton: # ********A********
             id: A_area
             text: 'A'
@@ -92,7 +94,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.14
             pos_hint: {'center_x': app.area_x, 'center_y': app.A_area_y}
-            on_press: app.autoStartAreaButtonFunctionality(A_area) 
+            on_press: root.autoStartAreaButtonFunctionality(A_area) 
  
         MDRectangleFlatButton: # ********B********
             id: B_area
@@ -102,7 +104,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.01
             pos_hint: {'center_x': app.area_x, 'center_y': app.B_area_y}
-            on_press: app.autoStartAreaButtonFunctionality(B_area)
+            on_press: root.autoStartAreaButtonFunctionality(B_area)
  
 
         MDRectangleFlatButton: # ********C********
@@ -113,7 +115,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.05
             pos_hint: {'center_x': app.area_x, 'center_y': app.C_area_y}
-            on_press: app.autoStartAreaButtonFunctionality(C_area)
+            on_press: root.autoStartAreaButtonFunctionality(C_area)
  
 
             
@@ -125,7 +127,7 @@ KV = """
             size_hint_min: None, None
             size_hint: 0.19, 0.07
             pos_hint: {'center_x': app.area_x, 'center_y': app.D_area_y}
-            on_press: app.autoStartAreaButtonFunctionality(D_area)
+            on_press: root.autoStartAreaButtonFunctionality(D_area)
  
 
 
@@ -219,14 +221,14 @@ KV = """
             text: "Yes"
             pos_hint: {'center_x': 0.32, 'center_y': 0.1}
             md_bg_color: 1, 0, 0, 1
-            on_press: app.robotPassedLine(True,passLine)
+            on_press: root.robotPassedLine(True)
 
         MDRaisedButton:
             id: didntPassLine
             text: "No"
             pos_hint: {'center_x': 0.62, 'center_y': 0.1}
             md_bg_color: 1, 0, 0, 1
-            on_press: app.robotPassedLine(False,didntPassLine)
+            on_press: root.robotPassedLine(False)
 
         # Next button
         MDRectangleFlatButton:
@@ -240,4 +242,49 @@ KV = """
 
 """
 
+
 Builder.load_string(KV)
+
+class AutonomousPeriod(Screen, DynamicVariables, Constants):
+    
+    
+    def on_enter(self):
+        self.app = App.get_running_app()
+        self.screen = self.app.root.get_screen('autonomous_period')
+
+
+    def robotPassedLine(self, isPassedLine):
+        self.robot_Passed_the_Line = isPassedLine
+        
+        if isPassedLine:
+            self.screen.ids.didntPassLine.md_bg_color = (1,0,0,1)
+            self.screen.ids.passLine.md_bg_color = (0,1,0,1)
+        else:
+            self.screen.ids.didntPassLine.md_bg_color = (0,1,0,1)
+            self.screen.ids.passLine.md_bg_color = (1,0,0,1)
+
+            
+    def autoStartAreaButtonFunctionality(self, enableArea):
+        selected_attr = ["A_area_selected   ", "B_area_selected",
+                         "C_area_selected   ", "D_area_selected"]
+        
+        opinions = [self.screen.ids.A_area, self.screen.ids.B_area,
+                    self.screen.ids.C_area, self.screen.ids.D_area]
+            
+        for i, j in zip(opinions,selected_attr):
+            if i == enableArea:
+                setattr(self, j, 1)
+                i.md_bg_color = (1,0,1,1)
+            else:
+                setattr(self, j, 0.1)
+                i.md_bg_color = (1,0,1,0.1)
+
+
+    def autoSelectFunctionality(self, button, selected_attr):
+        current_selected = getattr(self, selected_attr)
+        if current_selected:
+            setattr(self, selected_attr, False)
+            button.md_bg_color = (1, 0, 1, 0.1)
+        else:
+            setattr(self, selected_attr, True)
+            button.md_bg_color = (1, 0, 1, 1)
