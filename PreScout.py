@@ -69,7 +69,6 @@ class PreScouting(Screen, DynamicVariables, Constants):
 
 
     def rememberPreScout(self):
-        self.scouterName = self.screen.ids.scouter_name.text[::-1]
-        self.groupNumber = self.screen.ids.group_num.text
-        self.qualificationNumber = self.screen.ids.qualification_num.text
-
+        DynamicVariables.scouterName = self.screen.ids.scouter_name.text[::-1]
+        DynamicVariables.groupNumber = self.screen.ids.group_num.text
+        DynamicVariables.qualificationNumber = self.screen.ids.qualification_num.text

@@ -129,8 +129,8 @@ class TeleopEndGamePeriod(Screen, DynamicVariables, Constants):
         ]
         for i, j in zip(opinions, select_attr):
             if i == selected:
-                setattr(self.screen, j, 1)
+                setattr(DynamicVariables, j, True)
                 i.md_bg_color = (1, 0, 1, 1)  # Set color to indicate selection
             else:
-                setattr(self.screen, j, 0)
+                setattr(DynamicVariables, j, False)
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection

@@ -66,7 +66,6 @@ KV = """
         on_press:
             root.manager.transition.direction = 'left'
             root.rememberText(addInformation)
-            app.println()
 
         # Back button
     MDRectangleFlatButton:
@@ -96,13 +95,12 @@ class GeneralInformation(Screen, DynamicVariables, Constants):
         
         for i, j in zip(opinions, select_attr):
             if i == selected:
-                setattr(self.screen, j, True)
+                setattr(DynamicVariables , j, True)
                 i.md_bg_color = (0, 1, 0, 1)  # Set color to indicate selection
             else:
-                setattr(self.screen, j, False)
+                setattr(DynamicVariables, j, False)
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
-    
 
     def rememberText(self, textFild):
-        self.inputText = textFild.text[::-1]
+        DynamicVariables.inputText = textFild.text[::-1]
     

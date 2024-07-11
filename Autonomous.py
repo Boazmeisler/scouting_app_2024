@@ -254,8 +254,7 @@ class AutonomousPeriod(Screen, DynamicVariables, Constants):
 
 
     def robotPassedLine(self, isPassedLine):
-        self.robot_Passed_the_Line = isPassedLine
-        
+        DynamicVariables.robot_Passed_the_Line = isPassedLine
         if isPassedLine:
             self.screen.ids.didntPassLine.md_bg_color = (1,0,0,1)
             self.screen.ids.passLine.md_bg_color = (0,1,0,1)
@@ -265,26 +264,25 @@ class AutonomousPeriod(Screen, DynamicVariables, Constants):
 
             
     def autoStartAreaButtonFunctionality(self, enableArea):
-        selected_attr = ["A_area_selected   ", "B_area_selected",
-                         "C_area_selected   ", "D_area_selected"]
+        selected_attr = ["A_area_selected", "B_area_selected",
+                         "C_area_selected", "D_area_selected"]
         
         opinions = [self.screen.ids.A_area, self.screen.ids.B_area,
                     self.screen.ids.C_area, self.screen.ids.D_area]
             
         for i, j in zip(opinions,selected_attr):
             if i == enableArea:
-                setattr(self, j, 1)
+                setattr(DynamicVariables, j, True)
                 i.md_bg_color = (1,0,1,1)
             else:
-                setattr(self, j, 0.1)
+                setattr(DynamicVariables, j, False)
                 i.md_bg_color = (1,0,1,0.1)
 
-
     def autoSelectFunctionality(self, button, selected_attr):
-        current_selected = getattr(self, selected_attr)
+        current_selected = getattr(DynamicVariables, selected_attr)
         if current_selected:
-            setattr(self, selected_attr, False)
+            setattr(DynamicVariables, selected_attr, False)
             button.md_bg_color = (1, 0, 1, 0.1)
         else:
-            setattr(self, selected_attr, True)
+            setattr(DynamicVariables, selected_attr, True)
             button.md_bg_color = (1, 0, 1, 1)
