@@ -3,9 +3,9 @@ class Constants():
     far_note_line_x = 0.142
     area_x = 0.85
 
-    stage_note_y = 0.644
+    stage_note_y = 0.779
     speaker_note_y = 0.712
-    amp_note_y = 0.779
+    amp_note_y = 0.644
     mid_field_lowest_note_y = 0.624
     mid_field_low_note_y = 0.702
     mid_field_mid_note_y = 0.78
@@ -90,7 +90,7 @@ class Constants():
 
 class DynamicVariables():
 
-    inputText = None
+    generalInformation = None 
 
     scouterName = None
     groupNumber = None
@@ -107,7 +107,6 @@ class DynamicVariables():
     isTrapAlone = False
     isTrapInHarmony = False
 
-        # Set transparency levels
     stage_note_selected = False
     speaker_note_selected = False
     amp_note_selected = False
@@ -130,5 +129,6 @@ class DynamicVariables():
     teleop_speaker_missed_count = "0"
     teleop_amp_missed_count = "0"
     teleop_delivery_count = "0"
+
         
     teleop_current_display_stats = "scored: 0" + "\n" + "missed: 0"

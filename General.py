@@ -57,7 +57,7 @@ KV = """
         size_hint_x:0.9
 
 
-    # Next button
+    # finish button
     MDRectangleFlatButton:
         pos_hint: {'center_x': 0.85, 'center_y': 0.05}
         text: "finish"
@@ -65,6 +65,7 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
+            app.println()
             root.rememberText(addInformation)
 
         # Back button
@@ -102,5 +103,5 @@ class GeneralInformation(Screen, DynamicVariables, Constants):
                 i.md_bg_color = (1, 0, 0, 1)  # Set color to indicate non-selection
 
     def rememberText(self, textFild):
-        DynamicVariables.inputText = textFild.text[::-1]
+        DynamicVariables.generalInformation = textFild.text[::-1]
     
