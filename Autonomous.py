@@ -283,6 +283,8 @@ class AutonomousPeriod(Screen, DynamicVariables, Constants):
         if current_selected:
             setattr(DynamicVariables, selected_attr, False)
             button.md_bg_color = (1, 0, 1, 0.1)
+            DynamicVariables.auto_count = str(int(DynamicVariables.auto_count) - 1)
         else:
             setattr(DynamicVariables, selected_attr, True)
             button.md_bg_color = (1, 0, 1, 1)
+            DynamicVariables.auto_count = str(int(DynamicVariables.auto_count) + 1)

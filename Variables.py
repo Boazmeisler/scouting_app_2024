@@ -119,11 +119,12 @@ class DynamicVariables():
     B_area_selected = False
     C_area_selected = False
     D_area_selected = False
+    robot_Passed_the_Line = False
 
 
     auto_amp_count = "0"
     auto_missed = "0"
-    robot_Passed_the_Line = None
+    auto_count = "0"
     teleop_speaker_scored_count = "0"
     teleop_amp_scored_count = "0"
     teleop_speaker_missed_count = "0"
