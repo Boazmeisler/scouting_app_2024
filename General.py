@@ -2,7 +2,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from Variables import DynamicVariables, Constants
-
+from SaveData import SaveDataClass
 
 KV = """
 <GeneralInformation>:
@@ -65,8 +65,9 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
-            app.println()
             root.rememberText(addInformation)
+            # root.saveData()
+            root.manager.current = 'end'
 
         # Back button
     MDRectangleFlatButton:
@@ -82,11 +83,14 @@ KV = """
 
 Builder.load_string(KV)
 
-class GeneralInformation(Screen, DynamicVariables, Constants):
+class GeneralInformation(Screen, DynamicVariables,Constants):
+    
     def on_enter(self):
         self.app = App.get_running_app()
         self.screen = self.app.root.get_screen('general')
-
+        
+    def saveData(self):
+        SaveDataClass().saveData()
 
     def defendSectionButtonFunctionality(self, selected):
         opinions = [

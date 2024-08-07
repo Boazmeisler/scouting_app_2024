@@ -10,6 +10,7 @@ from TeleopMid import KV, TeleopMidGamePeriod
 from TeleopEnd import KV, TeleopEndGamePeriod
 from General import KV, GeneralInformation
 from PreScout import KV, PreScouting
+from End import KV, EndScreen
 
 Window.size = (300, 630)
 
@@ -31,8 +32,9 @@ class ScoutingApp(MDApp,Constants,DynamicVariables):
         screenManager.add_widget(PreScouting(name="preScout"))
         screenManager.add_widget(AutonomousPeriod(name="autonomous_period"))
         screenManager.add_widget(TeleopMidGamePeriod(name="teleop_mid"))
-        screenManager.add_widget(TeleopEndGamePeriod(name="end"))
+        screenManager.add_widget(TeleopEndGamePeriod(name="teleop_end"))
         screenManager.add_widget(GeneralInformation(name="general"))
+        screenManager.add_widget(EndScreen(name="end"))
   
   
     def subtract(self, label, subtractFrom):

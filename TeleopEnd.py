@@ -6,7 +6,7 @@ from kivy.app import App
 
 KV = """
 <TeleopEndGamePeriod>:
-    name: 'end'
+    name: 'teleop_end'
     MDLabel:
         text: "Click on what happened in the game"
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
@@ -114,7 +114,7 @@ class TeleopEndGamePeriod(Screen, DynamicVariables, Constants):
 
     def on_enter(self):
             self.app = App.get_running_app()
-            self.screen = self.app.root.get_screen('end')
+            self.screen = self.app.root.get_screen('teleop_end')
 
 
     def endGameButtonFunctionality(self, selected):

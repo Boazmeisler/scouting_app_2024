@@ -122,7 +122,7 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'left'
-            root.manager.current = 'end'
+            root.manager.current = 'teleop_end'
         # Back button
     MDRectangleFlatButton:
         pos_hint: {'center_x': 0.15, 'center_y': 0.05}
