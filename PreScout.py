@@ -29,7 +29,7 @@ KV = """
         id: group_num
         text: 'Select an option'
         pos_hint: {'center_x': 0.5,'center_y': 0.58}
-        values: app.teams
+        values: root.teams
         size_hint: 0.9, None
         size: 200, 70
     MDLabel:

@@ -66,7 +66,7 @@ KV = """
         on_press:
             root.manager.transition.direction = 'left'
             root.rememberText(addInformation)
-            # root.saveData()
+            root.saveData()
             root.manager.current = 'end'
 
         # Back button
@@ -77,7 +77,7 @@ KV = """
         text_color: 1, 1, 1, 1
         on_press:
             root.manager.transition.direction = 'right'
-            root.manager.current = 'end'
+            root.manager.current = 'teleop_end'
 """
 
 

@@ -8,14 +8,14 @@ class SaveDataClass():
     
     def __init__(self):
         self.firebaseConfig = {
-      "apiKey": "AIzaSyADZRWuReRSXjVdpiQHslj04PZp9Xk_UwM",
-      "authDomain": "scouting-app-2024-559e2.firebaseapp.com",
-      "databaseURL": "https://scouting-app-2024-559e2-default-rtdb.europe-west1.firebasedatabase.app",
-      "projectId": "scouting-app-2024-559e2",
-      "storageBucket": "scouting-app-2024-559e2.appspot.com",
-      "messagingSenderId": "565883178884",
-      "appId": "1:565883178884:web:8ecf0977393514416017d1",
-      "measurementId": "G-L7PG8P6FGP"
+          "apiKey": "AIzaSyADZRWuReRSXjVdpiQHslj04PZp9Xk_UwM",
+          "authDomain": "scouting-app-2024-559e2.firebaseapp.com",
+          "databaseURL": "https://scouting-app-2024-559e2-default-rtdb.europe-west1.firebasedatabase.app",
+          "projectId": "scouting-app-2024-559e2",
+          "storageBucket": "scouting-app-2024-559e2.appspot.com",
+          "messagingSenderId": "565883178884",
+          "appId": "1:565883178884:web:8ecf0977393514416017d1",
+          "measurementId": "G-L7PG8P6FGP"
     }
         self.fireBase = pyrebase.initialize_app(self.firebaseConfig)
         self.db = self.fireBase.database()
@@ -31,10 +31,10 @@ class SaveDataClass():
         "auto amp count": int(DynamicVariables.auto_amp_count),
         "auto missed": int(DynamicVariables.auto_missed),
         "auto speaker count": int(DynamicVariables.auto_count) - int(DynamicVariables.auto_missed) - int(DynamicVariables.auto_amp_count),
-        "A area selected: ": DynamicVariables.A_area_selected,
-        "B area selected: ": DynamicVariables.B_area_selected,
-        "C area selected: ": DynamicVariables.C_area_selected,
-        "D area selected: ": DynamicVariables.D_area_selected,
+        "A area selected": DynamicVariables.A_area_selected,
+        "B area selected": DynamicVariables.B_area_selected,
+        "C area selected": DynamicVariables.C_area_selected,
+        "D area selected": DynamicVariables.D_area_selected,
         "stage note selected": DynamicVariables.stage_note_selected,
         "speaker note selected": DynamicVariables.speaker_note_selected,
         "amp note selected": DynamicVariables.amp_note_selected,
