@@ -40,7 +40,7 @@ class Constants():
     "3211-The Y Team",
     "3316-D-Bug",
     "3339-BumbleB",
-    "3388-Flash in memory of Margarita Gusak",
+    "3388-Flash",
     "3835-Vulcan",
     "4319-Ladies FIRST",
     "4320-The Joker",
